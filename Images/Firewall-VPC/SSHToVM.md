@@ -42,7 +42,11 @@ After the change ping will work.
 
 Remove
 ```
-gcloud compute instances delete vm1 --zone=us-central1-a
-gcloud compute instances delete vm2 --zone=us-central1-a
+gcloud compute instances delete vm-1 --zone=us-central1-a -q
+gcloud compute instances delete vm-2 --zone=us-central1-a -q
 
+gcloud compute firewall-rules delete ssh -q
+gcloud compute firewall-rules delete icmp -q
+gcloud compute networks subnets delete subnet0 --region=us-central1 -q
+gcloud compute networks delete vpc0 -q
 ```
