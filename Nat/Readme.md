@@ -14,6 +14,7 @@ The tutorial below will:
 - Create Cloud Nat 
 - **Show that VM without public address but in the subnetwork that has NAT assigned can access Internet**
 
+![scenario](./images/Scenario.png)
 
 Create VPC and subnetwork
 

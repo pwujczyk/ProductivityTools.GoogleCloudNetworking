@@ -11,3 +11,26 @@ The rules are applied on the network level and validated during each data exchan
 
 - [We cannot ssh into instance without new rule on VPC Firewall](./Firewals-SSH-Ping/Index.md)
 - [We cannot ping vm1 instance from vm2 instance without new rule on VPC Firewall](./Firewals-SSH-Ping/Index.md)
+
+
+GCP allow us to create firewall rules in places:
+
+- VPC firewall **Create a firewall rule**
+
+VPC Networks &#187; Chose VPC Network &#187; 
+    Firewalls &#187; Add Firewall rule
+
+![add-vpc-firewall-rule](./images/add-vpc-firewall-rule.png)
+
+
+VPC Networks &#187; Firewall  &#187; Create filewall 
+rule
+
+![create-firewall-rule](./images/create-firewall-rule.png)
+
+- NGFW (Next Generation Firewall)
+
+VPC Networks &#187; Firewall  &#187; Create filewall 
+policy
+
+![create-firewall-policy](./images/create-firewall-policy.png)
