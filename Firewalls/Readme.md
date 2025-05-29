@@ -1,17 +1,22 @@
-# firewalls in GCP
+# Firewalls rules in GCP
 
-GCP allows to configure firewalls on different levels
+GCP allows to create firewall rules in two places 
+ - VPC Policy 
+ - NGFW Policy
 
-## VPC Firewall
-During VPC network creation we can create Firewall rules. By default all ingress (from Internet) is denied and all egress is allowed. 
+ Each request is evaluated in sequence
+ VPC Firewall rules &#187; NGFW Policies
 
-![VPCFirewall](./images/VPCFirewall.png)
+ If rule matches in the VPC Firewall rule the NGFW rule won't be validated.
 
-The rules are applied on the network level and validated during each data exchange. I think about these as rules that are applied on each VM that is in the network like VM firewall. 
-
-- [We cannot ssh into instance without new rule on VPC Firewall](./Firewals-SSH-Ping/Index.md)
-- [We cannot ping vm1 instance from vm2 instance without new rule on VPC Firewall](./Firewals-SSH-Ping/Index.md)
-
+|VPC Policy|NGFW Policy|Result|
+|---------|-----------|------|
+|No rule|no rule|page does not work
+|Deny 80|Allow 80| page does not work
+|Allow 80| no rule|page works
+|Allow 80|Allow 80| page works
+|Allow 80|Deny 80| page works
+|No rule| Allow 80|page works
 
 GCP allow us to create firewall rules in places:
 
@@ -35,7 +40,6 @@ policy
 
 ![create-firewall-policy](./images/create-firewall-policy.png)
 
-
 ### VPC firewall and NGFW rules order
 
 How Service behaves when we set different rules in the two firewalls?
@@ -52,4 +56,45 @@ sudo apt-get update
 sudo apt-get install apache2 -y
 echo '<!doctype html><html><body><h1>Hello World!</h1></body></html>' | sudo tee /var/www/html/index.html
 ```
+Let us validate that server, but request to external IP fails
 
+![curl-localhost-externalip](./images/curl-localhost-externalip.png)
+
+### VPC firewall rule
+
+VPC Network &#187; *VPC0* &#187; Firewalls &#187; Add firewall rule
+
+```
+Action on match: alow
+All instances in the network
+Source IPv4 ranges: 0.0.0.0/0
+TCP 80
+```
+![vpc-firewall-rule-configuration](./vpc-firewall-rule-configuration.png)
+
+It works
+
+![vpc-firewall-rule-works](./images/vpc-firewall-rule-works.png)
+
+Remove the rule
+
+### NGFW rule
+
+VPC Network &#187; *VPC0* &#187; Firewall &#187; Create firewall policy
+
+```
+Ingress
+Target: Apply to all
+Source filters 0.0.0.0/0
+Destination  0.0.0.0/0
+Protocols and ports > Specified protocols and ports > TCP > 80
+Associate policy with VPC networks (optional) > vpc0
+```
+
+VPC Rule deny
+```
+Action on match: deny
+All instances in the network
+Source IPv4 ranges: 0.0.0.0/0
+TCP 80
+```
