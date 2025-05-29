@@ -34,3 +34,22 @@ VPC Networks &#187; Firewall  &#187; Create filewall
 policy
 
 ![create-firewall-policy](./images/create-firewall-policy.png)
+
+
+### VPC firewall and NGFW rules order
+
+How Service behaves when we set different rules in the two firewalls?
+
+Let us create 
+- VPC with one subnetwork and opened port for ssh
+
+![vpc-with-ssh-enabled](./images/vpc-with-ssh-enabled.png)
+
+- VM with the apache installed
+
+```shell
+sudo apt-get update 
+sudo apt-get install apache2 -y
+echo '<!doctype html><html><body><h1>Hello World!</h1></body></html>' | sudo tee /var/www/html/index.html
+```
+

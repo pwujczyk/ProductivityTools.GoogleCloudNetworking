@@ -30,7 +30,7 @@ We cannot ping the VM2 from VM2
 ![ssh timeout](./images/ssh-timeout.png)
 
 Adding icmp
-```
+```shell
 gcloud compute firewall-rules create icmp --direction=INGRESS --priority=1000 --network=vpc0 --action=ALLOW --rules=icmp --source-ranges=0.0.0.0/0
 ```
 
@@ -41,7 +41,7 @@ After the change ping will work.
 ![Success ping](./images/success-ping.png)
 
 Remove
-```
+```shell
 gcloud compute instances delete vm-1 --zone=us-central1-a -q
 gcloud compute instances delete vm-2 --zone=us-central1-a -q
 
