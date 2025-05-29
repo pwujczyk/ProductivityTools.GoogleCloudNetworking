@@ -26,6 +26,7 @@ By default VPC has firewall enabled that does not allow for any incomming traffi
 - vpc0 (created network)
 - Firewalls
 - Add firewall rule
+
 ![add-firewall-rule](./images/add-firewall-rule.png)
 
 ### Rule
@@ -42,13 +43,14 @@ gcloud compute instances create vm-1 --zone=us-central1-a --machine-type=e2-micr
 Connect through web ssh and check the internet access ```curl -L google.com```
 
 VM has the connection, because:
-- VM has the firewall rule that allows for egress
-- VM has external address 
+- VM **has** the firewall rule that allows for egress
+- VM **has** external address 
 - Subnetwork sub0 does not have Internet connection  
 
 ![curl-with-external-ip](./images/curl-with-external-ip.png)
 
 Edit the vm and turn off the external IP.
+
 ![no-external-ip-on-vm](./images/no-external-ip-on-vm.png)
 
 ![no-external-ip-on-vm-list](./images/no-external-ip-on-vm-list.png)
@@ -56,7 +58,7 @@ Edit the vm and turn off the external IP.
 Check the internet access again.
 
 VM does not have the connection, because:
-- VM has the firewall rule that allows for egress
+- VM **has** the firewall rule that allows for egress
 - VM **does not** have external address 
 - Subnetwork sub0 **does not** have Internet connection  
 
@@ -71,6 +73,7 @@ Notice that you are creating NAT service for the whole VPC (not for the subnet)
 ![nat-config](./images/nat-config.png)
 
 In the field **Cloud Router** create new one
+
 ![router](./images/router0.png)
 
 Go again to the ssh window and validate that internet access works right now
@@ -78,6 +81,6 @@ Go again to the ssh window and validate that internet access works right now
 ![curl-works](./images/curl-works.png)
 
 VM does not have the connection, because:
-- VM has the firewall rule that allows for egress
+- VM **has** the firewall rule that allows for egress
 - VM **does not** have external address 
 - Subnetwork sub0 **has** Internet connection throug NAT
