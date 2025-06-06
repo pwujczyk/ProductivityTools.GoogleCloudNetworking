@@ -1,8 +1,9 @@
 # Firewalls rules in GCP
 
-GCP allows to create firewall rules in two places 
+GCP allows to create firewall rules in three places 
  - VPC Policy 
  - NGFW Policy
+ - Organization Project policy (described in the paragraph below as this is special case)
 
  Each request is evaluated in sequence
  VPC Firewall rules &#187; NGFW Policies
@@ -70,7 +71,7 @@ All instances in the network
 Source IPv4 ranges: 0.0.0.0/0
 TCP 80
 ```
-![vpc-firewall-rule-configuration](./vpc-firewall-rule-configuration.png)
+![vpc-firewall-rule-configuration](./images/vpc-firewall-rule-configuration.png)
 
 It works
 
@@ -98,3 +99,28 @@ All instances in the network
 Source IPv4 ranges: 0.0.0.0/0
 TCP 80
 ```
+
+## Organization or folder policy
+
+Firweall rules can be also created on the organization or folder level.
+
+Rules can be evaluated before or after the VPC rules.
+
+This command validates the mode.
+```
+gcloud compute networks describe vpc0 --format="value(networkFirewallPolicyEnforcementOrder)"
+```
+
+- AFTER_CLASSIC_FIREWALL
+
+VPC Firewall rules &#187; Policy rules &#187; NGFW Policies
+
+- BEFORE_CLASSIC_FIREWALL
+
+NGFW Policies &#187; VPC Firewall rules &#187;  Policy rules
+
+
+```
+gcloud compute networks update vpc0  --network-firewall-policy-enforcement-order BEFORE_CLASSIC_FIREWALL 
+```
+
