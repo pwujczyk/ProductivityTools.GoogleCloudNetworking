@@ -7,16 +7,18 @@ import { getSortedPostsData } from "../lib/posts";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
+  const menu=['VPC','Firewall']
   return {
     props: {
       allPostsData,
+      menu:menu
     },
   };
 }
 
-export default function Home({ allPostsData }) {
+export default function Home({ allPostsData, menu }) {
   return (
-    <Layout home>
+    <Layout home={true} menu={menu}>
       {/* Keep the existing code here */}
 
       {/* Add this <section> tag below the existing <section> tag */}
@@ -28,7 +30,6 @@ export default function Home({ allPostsData }) {
               <Link href={`/posts/${id}`}>{title}</Link>
               <br />
               <small className={utilStyles.lightText}>
-                <Date dateString={date} />
               </small>
             </li>
           ))}
