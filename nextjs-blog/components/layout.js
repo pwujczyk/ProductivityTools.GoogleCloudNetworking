@@ -7,16 +7,41 @@ import Link from "next/link";
 const name = "Your Name";
 export const siteTitle = "Next.js Sample Website";
 
+function MenuRenderer({ nodes, path='' }) {
+  if (!nodes || nodes.length === 0) {
+    return null;
+  }
+
+  return (
+    <ul>
+      {nodes.map((node) => (
+        <li key={node.name}>
+          <Link href={`/articles${path}/${node.name}`}>{node.name}</Link>
+          {node.children && node.children.length > 0 && (
+            <MenuRenderer nodes={node.children} path={`${path}/${node.name}`} />
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+
+//  {allPostsData.map(({ id, date, title }) => (
+//             <li className={utilStyles.listItem} key={id}>
+//               <Link href={`/posts/${id}`}>{title}</Link>
+//               <br />
+//               <small className={utilStyles.lightText}>
+//               </small>
+//             </li>
+//           ))}
+
 export default function Layout({ children, home, menu }) {
-  console.log("menu", menu);
   return (
     <div className={styles.container}>
-      <p>menu</p>
-      {menu?.map((x) => {
-        
-        return (<p>{x}</p>);
-      })}
-      <p>/menu</p>
+      <nav>
+        <MenuRenderer nodes={menu} />
+      </nav>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta

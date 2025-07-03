@@ -5,7 +5,37 @@ import { remark } from 'remark';
 import html from 'remark-html';
  
 const postsDirectory = path.join(process.cwd(), 'posts');
- 
+const articlesDirectory = path.join(process.cwd(), 'articles');
+
+export function getArticles(){
+  // A recursive function to build the directory tree.
+  const buildDirTree = (directory) => {
+    const tree = [];
+    // Using withFileTypes is more efficient as it avoids a separate fs.stat call for each item.
+    const items = fs.readdirSync(directory, { withFileTypes: true });
+
+    for (const item of items) {
+      if (item.isDirectory()) {
+        const subDirPath = path.join(directory, item.name);
+        // Recursively build the tree for subdirectories.
+        const children = buildDirTree(subDirPath);
+        tree.push({
+          name: item.name,
+          children: children,
+        });
+      }
+    }
+    return tree;
+  };
+
+  // Start building the tree, but only if the base directory exists to avoid errors.
+  if (fs.existsSync(articlesDirectory)) {
+    return buildDirTree(articlesDirectory);
+  }
+
+  return []; // Return an empty array if the directory doesn't exist.
+}
+
 export function getSortedPostsData() {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory);

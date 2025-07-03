@@ -3,11 +3,11 @@ import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 
-import { getSortedPostsData } from "../lib/posts";
+import { getArticles, getSortedPostsData } from "../lib/posts";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
-  const menu=['VPC','Firewall']
+  const menu=getArticles();
   return {
     props: {
       allPostsData,

@@ -36,35 +36,41 @@ export function getSortedArticlesData() {
   });
 }
 
-export function getAllPostIds() {
-  const fileNames = fs.readdirSync(postsDirectory);
- 
-  // Returns an array that looks like this:
-  // [
-  //   {
-  //     params: {
-  //       id: 'ssg-ssr'
-  //     }
-  //   },
-  //   {
-  //     params: {
-  //       id: 'pre-rendering'
-  //     }
-  //   }
-  // ]
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, ''),
-      },
-    };
-  });
+export function getAllArticlesIds() {
+  const paths = [];
+
+  const findArticlePaths = (directory, parentPath = []) => {
+    const items = fs.readdirSync(directory, { withFileTypes: true });
+
+    for (const item of items) {
+      if (item.isDirectory()) {
+        findArticlePaths(
+          path.join(directory, item.name),
+          [...parentPath, item.name]
+        );
+      } else if (item.name === 'index.md') {
+        // A slug must have at least one segment for [...slug].js
+        if (parentPath.length > 0) {
+          paths.push({
+            params: {
+              slug: parentPath,
+            },
+          });
+        }
+      }
+    }
+  };
+
+  // Start the search if the articles directory exists.
+  if (fs.existsSync(postsDirectory)) {
+    findArticlePaths(postsDirectory);
+  }
+
+  return paths;
 }
 
-
-
-export async function getPostData(id) {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
+export async function getArticleData(slug) {
+  const fullPath = path.join(postsDirectory, ...slug, `index.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
  
   // Use gray-matter to parse the post metadata section
@@ -78,8 +84,8 @@ export async function getPostData(id) {
  
   // Combine the data with the id and contentHtml
   return {
-    id,
+    id: slug.join('/'),
     contentHtml,
     ...matterResult.data,
   };
-}
+} 
