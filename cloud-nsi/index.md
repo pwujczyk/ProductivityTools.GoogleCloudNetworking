@@ -16,37 +16,19 @@ GCP does not offer packet analysis tools. GCP allows to deploy custom software o
 
 ## Additional terms
 
-- Prevension system - the term is used in the context of interecpt/in-band of the packets. It increases the time of the request but protects in the real time
-- Intrudion detection system the term is use din the context of mirroring/out-band of the packets. It analyses packets in the background and performs actions afterwards.
-- Geneve protocol - To mirror or to redirect data to the 3rd party solution geneve protocol is used, The most important to know that geneve allows to redirect packet in its orignal state, with all headers, source and destination ip.
-
-
- ```
- - A service producer network contains a set of scalable third-party network appliances that are deployed as backends to an internal load balancer.
-- A service consumer uses a firewall policy to select specific traffic and redirect the selected traffic to a group of endpoints.
-- The endpoint group in a consumer network sends the selected traffic to a service producer, where the internal load balancer distributes the traffic to the third-party appliances for inspection.
- ```
- My interpretation:
- - service producer is 3rd party software that will be used to analyze the packets
- - service consumer is a GCP resource, for example VM
- - The endpoint group is a GCP resource that is used as a proxy to send traffic from the VM to the external service (for packet inspection)
-
-TL;DR;
-
+- **in-band** - describes a method where control or management signals are sent over the same communication channel as the data itself
+- **out-of-band** -  separate, dedicated channel is used for control and management.
+- **Prevension system** - the term is used in the context of interecpt/in-band of the packets. It increases the time of the request but protects in the real time
+- **Intrudion detection** system the term is use in the context of mirroring/out-band of the packets. It analyses packets in the background and performs actions afterwards.
+- **Geneve protocol** - To mirror or to redirect data to the 3rd party solution geneve protocol is used, The most important to know that geneve allows to redirect packet in its orignal state, with all headers and original source and destination ip.
 - **Service producer** third-party entity (person, company) that manages solution. Solution should offer packet inspection. Service producer deploys VM in Intercept deploymnet group
 - **Intercept deployment group** group of VMs used to analyze packets
 - **VM** - GCE with software that allows to analyze packets it couuld be for example a firewall or intrusion detection system
-- **In-band** and **Out-of-band** integration - 
 
 
-What does 'For each zone, producers register their VMs as backends to an internal passthrough Network Load Balancer in their VPC network.' mean. What kind of load balancer is mentioned here?
 
 ## Producer and consumer confusion
 
-- The design of the functionality defines **Producer** role aas a person who deploys the intercept solution and the **Consumer** that uses the solution. That make sense if we look at the wohle solution as service that is offered to others
+- The design of the functionality defines **Producer** role as a person who deploys the intercept solution and the **Consumer** that uses the solution. That make sense if we look at the wohle solution as service that is offered to others
 - From the request-response point of view the roles should be different. The producer should be the part that sends the packets, and consumer the one who receives them and make decision based on them. 
 
-
-
-Questions
-- who is responsible for deploying internal load balancers
