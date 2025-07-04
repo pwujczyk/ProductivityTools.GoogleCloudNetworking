@@ -69,17 +69,49 @@ export function getAllArticlesIds() {
   return paths;
 }
 
+function copyImagesToPublicDirectory(markdownPath) {
+  const articleDir = path.dirname(markdownPath);
+  const sourceImagesDir = path.join(articleDir, 'images');
+
+  // Check if the source images directory exists
+  if (!fs.existsSync(sourceImagesDir)) {
+    return;
+  }
+
+  // Determine the destination directory within the public folder.
+  // We want to mirror the structure from the 'articles' directory.
+  const relativeArticleDir = path.relative(postsDirectory, articleDir);
+  const publicDir = path.join(process.cwd(), 'public');
+  const destImagesDir = path.join(publicDir, relativeArticleDir, 'images');
+
+  // Create the destination directory if it doesn't exist
+  fs.mkdirSync(destImagesDir, { recursive: true });
+
+  // Copy all files from the source to the destination
+  const imageFiles = fs.readdirSync(sourceImagesDir);
+  for (const file of imageFiles) {
+    const srcFile = path.join(sourceImagesDir, file);
+    const destFile = path.join(destImagesDir, file);
+    fs.copyFileSync(srcFile, destFile);
+  }
+}
+
 export async function getArticleData(slug) {
   const fullPath = path.join(postsDirectory, ...slug, `index.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
  
+  copyImagesToPublicDirectory(fullPath);
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
  
+  // Modify image paths in markdown to be absolute, so they work correctly after routing.
+  // e.g., transforms `!alt` to `!alt`
+  const contentWithAbsoluteImagePaths = matterResult.content.replace(/(!\[[^\]]*\]\()(?:\.\/)?(images\/)/g, `$1/${slug.join('/')}/$2`);
+
   // Use remark to convert markdown into HTML string
   const processedContent = await remark()
     .use(html)
-    .process(matterResult.content);
+    .process(contentWithAbsoluteImagePaths);
   const contentHtml = processedContent.toString();
  
   // Combine the data with the id and contentHtml

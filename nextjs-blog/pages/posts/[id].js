@@ -1,13 +1,15 @@
 import Layout from "../../components/layout";
-import { getAllPostIds, getPostData } from '../../lib/posts';
+import { getAllPostIds, getPostData, getArticles } from '../../lib/posts';
  
 export async function getStaticProps({ params }) {
   // Add the "await" keyword like this:
   const postData = await getPostData(params.id);
+  const menu = getArticles();
  
   return {
     props: {
       postData,
+      menu,
     },
   };
 }
@@ -19,9 +21,9 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-export default function Post({ postData }) {
+export default function Post({ postData, menu }) {
   return (
-    <Layout>
+    <Layout menu={menu}>
       {postData.title}
       <br />
       {postData.id}

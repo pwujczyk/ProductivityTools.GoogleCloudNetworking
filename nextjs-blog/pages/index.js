@@ -18,7 +18,7 @@ export async function getStaticProps() {
 
 export default function Home({ allPostsData, menu }) {
   return (
-    <Layout home={true} menu={menu}>
+    <Layout menu={menu}>
       {/* Keep the existing code here */}
 
       {/* Add this <section> tag below the existing <section> tag */}
