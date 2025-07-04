@@ -15,7 +15,7 @@ export function getArticles(){
     const items = fs.readdirSync(directory, { withFileTypes: true });
 
     for (const item of items) {
-      if (item.isDirectory()) {
+      if (item.isDirectory() && item.name !== 'images') {
         const subDirPath = path.join(directory, item.name);
         // Recursively build the tree for subdirectories.
         const children = buildDirTree(subDirPath);

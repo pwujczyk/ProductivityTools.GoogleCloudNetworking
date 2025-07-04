@@ -1,6 +1,9 @@
+import Markdown from "react-markdown";
 import Layout from "../../components/layout";
 import { getArticleData, getAllArticlesIds } from "../../lib/articles";
 import { getArticles } from "../../lib/posts";
+import remarkGfm from 'remark-gfm'
+
  
 export async function getStaticProps({ params }) {
   // params.slug will be an array of path segments e.g. ['vpc', 'peering']
@@ -31,7 +34,8 @@ export default function Article({ postData, menu }) {
       <br />
       <small>date: {postData.date}</small>
       <br />
-      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      <Markdown remarkPlugins={[remarkGfm]}>{postData.content}</Markdown>
+      {/* <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} /> */}
     </Layout>
   );
 }
