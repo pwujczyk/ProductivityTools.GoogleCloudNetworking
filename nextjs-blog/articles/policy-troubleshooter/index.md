@@ -24,5 +24,21 @@ For the resource I chose Browse and look for the resource that was listed in the
 
 ![resource-selection](./images/resource-selection.png)
 
+We can add multiple permissions
+
+![multiple-permissions](./images/multiple-permissions.png)
+
+In the next screen in the drop down we have results for all evaluations
+
+![multiple-results](./images/multiple-results.png)
+
+Check the details for the permission
+
+![permission-details](./images/permission-details.png)
 
 
+
+## Find the correct role based on the permission
+Go to IAM Roles and search for permission it will return the roles where permission is used.
+
+![roles](./images/roles.png)
