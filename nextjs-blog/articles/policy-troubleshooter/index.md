@@ -1,6 +1,19 @@
-Link
+# Policy Troubleshooter
 
-Let us go through example
+Path: **IAM & Admin/Policy troubleshooter**
+
+GCP permissions have two levels 
+- Permissions - this is the atomic permission that you need to have to perform an action it looks like *compute.firewall.list*. It describes what actually you can do with it.
+- Roles - are the group of profiles for example **Compute Admin** role groups all the permissions that Cloud thinks Compute admin should have.
+
+
+The trick is that when you try to do something permissions are validated and permissions are shown in errors, but you assign roles to the users. 
+
+It is not straightforward what roles you should assign to yourself when you face error.
+
+**Policy troubleshooter** is a tool that should help to find the proper role. 
+
+## Example
 
 I see that I have one button disabled and when I hover it I see that I miss permissions
 ![permission-issue](./images/permission-issue.png)
