@@ -16,3 +16,7 @@ After creating security profile and security group. Group can be added to the Fi
 Firewall policy can be asociated wth organizatino or folder. It means that each project that is child of the organization or the folder will have firewall policy forced. 
 
 ![inherited-policy](./images/inherited-policy.png)
+
+The dependency graph:
+
+![Networking-Security-profiles](./images/Networking-Security-profiles.png)
