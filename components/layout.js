@@ -4,18 +4,21 @@ import Link from "next/link";
 
 export const siteTitle = "Next.js Sample Website";
 
-function MenuRenderer({ nodes, path='' }) {
+function MenuRenderer({ nodes, path = '', level = 0 }) {
   if (!nodes || nodes.length === 0) {
     return null;
   }
 
   return (
-    <ul>
+    <ul className={level === 0 ? styles.menuMainList : styles.menuSubList}>
       {nodes.map((node) => (
-        <li key={node.name}>
+        <li
+          key={node.name}
+          className={level === 0 ? styles.menuMainItem : styles.menuSubItem}
+        >
           <Link href={`/articles${path}/${node.name}`}>{node.name}</Link>
           {node.children && node.children.length > 0 && (
-            <MenuRenderer nodes={node.children} path={`${path}/${node.name}`} />
+            <MenuRenderer nodes={node.children} path={`${path}/${node.name}`} level={level + 1} />
           )}
         </li>
       ))}
