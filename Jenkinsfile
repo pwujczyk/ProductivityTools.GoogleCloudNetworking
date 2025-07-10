@@ -68,8 +68,9 @@ pipeline {
         }
         stage('Copy the page') {
             steps {
-                dir('/home/pawel/bin/pt.networking') {
-                    sh 'pwd -P'
+                script{
+                    sh 'mkdir -p /srv/jenkins/jobs/project/workspace'
+                    }
                 }
             }
         }
