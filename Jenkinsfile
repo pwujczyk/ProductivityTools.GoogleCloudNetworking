@@ -70,10 +70,8 @@ pipeline {
             steps {
                 script{
                     sh 'mkdir -p /srv/jenkins/jobs/project/workspace'
-                    }
                 }
             }
-        }
-
+        }  
     }
 }
