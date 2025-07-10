@@ -45,7 +45,7 @@ pipeline {
             steps {
                  script {
                     echo 
-                    def directoryToRemove = '/home/pawel/bin/ProductivityTools.GoogleCloudNetworking/'
+                    def directoryToRemove = '/opt/pt.bin/ProductivityTools.GoogleCloudNetworking/'
                     echo "Removing directory: '${directoryToRemove}'"
 
                     echo "Checking if directory '${directoryToRemove}' exists..."
@@ -74,7 +74,7 @@ pipeline {
             steps {
 				script {
                     def sourceDir='/var/lib/jenkins/workspace/ProductivityTools.GoogleCloudNetworking'
-                    def destinationDir='/home/pawel/bin/ProductivityTools.GoogleCloudNetworking'
+                    def destinationDir='/opt/pt.bin/ProductivityTools.GoogleCloudNetworking'
                     echo "Creating destination base directory: ${destinationDir}"
                     sh "sudo -u root mkdir -p '${destinationDir}'"
                     
