@@ -68,8 +68,8 @@ pipeline {
         }
         stage('Copy the page') {
             steps {
-                dir('/home/pawel/bin/pt.networking'){
-                     writeFile file:'dummy', text:''
+                dir('/home/pawel/bin/pt.networking') {
+                    sh 'pwd -P'
                 }
             }
         }
