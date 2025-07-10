@@ -44,7 +44,6 @@ pipeline {
          stage('DeleteAllconfigurationDir') {
             steps {
                  script {
-                    echo 
                     def directoryToRemove = '/var/lib/jenkins/workspace/bin/ProductivityTools.GoogleCloudNetworking/'
                     echo "Removing directory: '${directoryToRemove}'"
 
