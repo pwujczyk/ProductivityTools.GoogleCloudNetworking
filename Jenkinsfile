@@ -68,7 +68,9 @@ pipeline {
         }
         stage('Copy the page') {
             steps {
-                dir('/home/pawel/bin')
+                dir('/home/pawel/bin/pt.networking'){
+                     writeFile file:'dummy', text:''
+                }
             }
         }
 
