@@ -24,7 +24,21 @@ pipeline {
        
         stage('DeleteAllconfigurationDir') {
             steps {
-                bat('if exist "/home/pawel/bin/ProductivityTools.GoogleCloudNetworking" RMDIR /Q/S "/home/pawel/bin/ProductivityTools.GoogleCloudNetworking"')
+                 script {
+                    def directoryToRemove = '/home/pawel/bin/ProductivityTools.GoogleCloudNetworking/'
+
+                
+                    echo "Removing directory: '${directoryToRemove}'"
+                    sh "rm -rf ${directoryToRemove}"
+
+                    // --- Verify the removal operation ---
+                    echo "Checking if directory '${directoryToRemove}' still exists:"
+                    // 'test -d' checks if a path is a directory.
+                    // '|| true' prevents the step from failing if the directory is already gone.
+                    sh "test -d ${directoryToRemove} && echo 'Directory still exists (Error!)' || echo 'Directory successfully removed.'"
+
+                    echo "Directory removal complete."
+                }
             }
         }
 		
