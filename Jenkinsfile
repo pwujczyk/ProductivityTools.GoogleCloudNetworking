@@ -32,8 +32,8 @@ pipeline {
 		
         stage('Copy the page') {
             steps {
-				script{
-                    sh 'cp -r /var/lib/jenkins/workspace/ProductivityTools.GoogleCloudNetworking /home/pawel/bin/ProductivityTools.GoogleCloudNetworking
+				script {
+                    sh 'cp -r /var/lib/jenkins/workspace/ProductivityTools.GoogleCloudNetworking /home/pawel/bin/ProductivityTools.GoogleCloudNetworking/
                 }
             }
         }
