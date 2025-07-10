@@ -44,7 +44,7 @@ pipeline {
          stage('DeleteAllconfigurationDir') {
             steps {
                  script {
-                    def directoryToRemove = '/var/lib/jenkins/workspace/bin/ProductivityTools.GoogleCloudNetworking/'
+                    def directoryToRemove = '/srv/jenkins/pt.googlecloudnetworking'
                     echo "Removing directory: '${directoryToRemove}'"
 
                     echo "Checking if directory '${directoryToRemove}' exists..."
@@ -69,7 +69,7 @@ pipeline {
         stage('Copy the page') {
             steps {
                 script{
-                    sh 'mkdir -p /srv/jenkins/jobs/project/workspace'
+                    sh 'mkdir -p /srv/jenkins/pt.googlecloudnetworking'
                 }
             }
         }  
