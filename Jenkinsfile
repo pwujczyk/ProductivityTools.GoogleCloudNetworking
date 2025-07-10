@@ -72,7 +72,7 @@ pipeline {
                     def sourceDir='/var/lib/jenkins/workspace/ProductivityTools.GoogleCloudNetworking'
                     def destinationDir='/var/lib/jenkins/workspace/bin/ProductivityTools.GoogleCloudNetworking'
                     echo "Creating destination base directory: ${destinationDir}"
-                    sh "sudo -u root mkdir -p '${destinationDir}'"
+                    sh "mkdir -p '${destinationDir}'"
                     
                     sh "cp -r ${sourceDir} ${destinationDir}"
                 }
