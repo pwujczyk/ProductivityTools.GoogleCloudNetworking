@@ -26,12 +26,10 @@ pipeline {
             steps {
                  script {
                     def directoryToRemove = '/home/pawel/bin/ProductivityTools.GoogleCloudNetworking/'
-
-                
                     echo "Removing directory: '${directoryToRemove}'"
 
-                    echo "Checking if directory '${destinationDir}' exists..."
-                    def dirExists = sh(script: "test -d ${destinationDir}", returnStatus: true) == 0
+                    echo "Checking if directory '${directoryToRemove}' exists..."
+                    def dirExists = sh(script: "test -d ${directoryToRemove}", returnStatus: true) == 0
 
                     if (dirExists) {
                          echo "removing directory."
