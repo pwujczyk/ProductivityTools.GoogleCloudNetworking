@@ -69,7 +69,11 @@ pipeline {
         stage('Copy the page') {
             steps {
                 script{
-                    sh 'mkdir -p /srv/jenkins/pt.googlecloudnetworking'
+                    def sourceDir='/var/lib/jenkins/workspace/ProductivityTools.GoogleCloudNetworking'
+                    def destinationDir='/srv/jenkins/pt.googlecloudnetworking'
+                    sh "mkdir -p ${destinationDir}"
+
+                    sh "cp -r ${sourceDir} ${destinationDir}"
                 }
             }
         }  
