@@ -49,7 +49,14 @@ pipeline {
 				script {
                     def sourceDir='/var/lib/jenkins/workspace/ProductivityTools.GoogleCloudNetworking'
                     def destinationDir='/home/pawel/bin/ProductivityTools.GoogleCloudNetworking/'
-                    sh "cp -r ${sourceDir} ${destinationDir}/"
+                     echo "Checking if directory '${directoryToRemove}' exists..."
+                    def dirExists = sh(script: "test -d ${directoryToRemove}", returnStatus: true) == 0
+
+                    if (dirExists) {
+                        echo "Directory '${directoryToRemove}' already exists."
+                        sh "cp -r ${sourceDir} ${destinationDir}/"
+                    } 
+                    
                 }
             }
         }
