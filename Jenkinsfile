@@ -8,6 +8,25 @@ pipeline {
                 echo 'Hello!'
             }
         }
+
+        stage('Identify User') {
+            steps {
+                script {
+                    echo "Sprawdzanie, jako który użytkownik Jenkins wykonuje komendy..."
+
+                    // Komenda whoami
+                    echo "Nazwa użytkownika (whoami):"
+                    sh 'whoami'
+
+                    // Komenda id (bardziej szczegółowa)
+                    echo "Szczegóły użytkownika (id):"
+                    sh 'id'
+
+                    echo "Zakończono identyfikację użytkownika."
+                }
+            }
+        }
+
         stage('deleteWorkspace') {
             steps {
                 deleteDir()
@@ -25,6 +44,7 @@ pipeline {
         stage('DeleteAllconfigurationDir') {
             steps {
                  script {
+                    echo 
                     def directoryToRemove = '/home/pawel/bin/ProductivityTools.GoogleCloudNetworking/'
                     echo "Removing directory: '${directoryToRemove}'"
 
