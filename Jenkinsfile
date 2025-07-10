@@ -32,7 +32,9 @@ pipeline {
 		
         stage('Copy the page') {
             steps {
-				bat('xcopy "/var/lib/jenkins/workspace/ProductivityTools.GoogleCloudNetworking" "/home/pawel/bin/ProductivityTools.GoogleCloudNetworking" /O /X /E /H /K')
+				script{
+                    sh 'cp -r /var/lib/jenkins/workspace/ProductivityTools.GoogleCloudNetworking /home/pawel/bin/ProductivityTools.GoogleCloudNetworking
+                }
             }
         }
 
