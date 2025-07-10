@@ -33,7 +33,9 @@ pipeline {
         stage('Copy the page') {
             steps {
 				script {
-                    sh 'cp -r /var/lib/jenkins/workspace/ProductivityTools.GoogleCloudNetworking /home/pawel/bin/ProductivityTools.GoogleCloudNetworking/
+                    def sourceDir='/var/lib/jenkins/workspace/ProductivityTools.GoogleCloudNetworking'
+                    def destinationDir='/home/pawel/bin/ProductivityTools.GoogleCloudNetworking/'
+                    sh "cp -r ${sourceDir} ${destinationDir}/"
                 }
             }
         }
