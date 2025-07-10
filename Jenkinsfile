@@ -18,8 +18,7 @@ pipeline {
             steps {
                 // Get some code from a GitHub repository
                 git branch: 'main',
-				credentialsId:'pwujczyk',
-                url: 'git@github.com:pwujczyk/ProductivityTools.GoogleCloudNetworking.git'
+                url: 'https://github.com/pwujczyk/ProductivityTools.GoogleCloudNetworking.git'
             }
         }
        
