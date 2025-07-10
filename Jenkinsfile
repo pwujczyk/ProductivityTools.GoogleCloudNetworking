@@ -69,10 +69,10 @@ pipeline {
         stage('Copy the page') {
             steps {
 				script {
-                    def sourceDir='/var/lib/jenkins/workspace/bin/ProductivityTools.GoogleCloudNetworking'
-                    def destinationDir='/home/pawel/bin/ProductivityTools.GoogleCloudNetworking'
+                    def sourceDir='/var/lib/jenkins/workspace/ProductivityTools.GoogleCloudNetworking'
+                    def destinationDir='/var/lib/jenkins/workspace/bin/ProductivityTools.GoogleCloudNetworking'
                     echo "Creating destination base directory: ${destinationDir}"
-                    sh "mkdir -p '${destinationDir}'"
+                    sh "sudo -u root mkdir -p '${destinationDir}'"
                     
                     sh "cp -r ${sourceDir} ${destinationDir}"
                 }
