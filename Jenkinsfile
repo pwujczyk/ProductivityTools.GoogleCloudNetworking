@@ -70,7 +70,7 @@ pipeline {
             steps {
                 script{
                     def sourceDir='/var/lib/jenkins/workspace/PT.GoogleCloudNetworking'
-                    def destinationDir='/srv/jenkins/PT.GoogleCloudNetworking'
+                    def destinationDir='/srv/jenkins/PT.GoogleCloudNetworking/'
                     //sh "mkdir -p ${destinationDir}"
 
                     sh "cp -r ${sourceDir} ${destinationDir}"
