@@ -73,7 +73,7 @@ pipeline {
                     def destinationDir='/srv/jenkins/'
                     //sh "mkdir -p ${destinationDir}"
 
-                    sh "cp -r ${sourceDir} ${destinationDir}"
+                    sh "rsync -av --exclude='.git/' ${sourceDir}/ ${destinationDir}"
                 }
             }
         }  
