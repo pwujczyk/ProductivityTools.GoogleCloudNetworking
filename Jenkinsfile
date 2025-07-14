@@ -77,5 +77,13 @@ pipeline {
                 }
             }
         }  
+
+         stage('start page') {
+            steps {
+                script{
+                    sh 'pm2 start npm --name "gcpnetworking" -- start'
+                }
+            }
+        }  
     }
 }
