@@ -73,3 +73,11 @@ Below is a diagram of all components that are needed to configure the solution.
 ![Firewall policy rule](./images/firewall-policy-rule.png)
 
 
+Commands
+
+```
+gcloud beta network-security intercept-deployment-groups list
+gcloud beta network-security intercept-deployment-groups describe pwx1 --location=global
+```
+
+
