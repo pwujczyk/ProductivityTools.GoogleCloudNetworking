@@ -79,7 +79,7 @@ pipeline {
             steps {
                 script{
                     def sourceDir = '/var/lib/jenkins/workspace/PT.GoogleCloudNetworking'
-                    def destinationDir = '/srv/jenkins/pt.googlecloudnetworking'
+                    def destinationDir = '/srv/jenkins/'
                     
                     echo "Creating destination directory if it doesn't exist: ${destinationDir}"
                     sh "mkdir -p ${destinationDir}"
