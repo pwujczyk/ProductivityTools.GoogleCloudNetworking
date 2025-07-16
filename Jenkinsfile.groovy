@@ -9,17 +9,6 @@ pipeline {
             }
         }
 
-        stage('Verify Node.js and NPM versions') {
-            steps {
-                script {
-                    echo "Verifying Node.js and NPM versions..."
-                    sh 'node -v'
-                    sh 'npm -v'
-                    echo "Node.js and NPM versions verified."
-                }
-            }
-        }
-
         stage('Identify User') {
             steps {
                 script {
@@ -49,6 +38,15 @@ pipeline {
                 // Get some code from a GitHub repository
                 git branch: 'main',
                 url: 'https://github.com/pwujczyk/ProductivityTools.GoogleCloudNetworking.git'
+            }
+        }
+
+        stage('NPM Install') {
+            steps {
+                script {
+                    echo "Installing NPM dependencies..."
+                    sh 'npm install'
+                }
             }
         }
 
@@ -86,7 +84,7 @@ pipeline {
                     echo "Creating destination directory if it doesn't exist: ${destinationDir}"
                     sh "mkdir -p ${destinationDir}"
 
-                    echo "Copying application files from ${sourceDir} to ${destinationDir}"
+                    echo "Copying application files (including node_modules) from ${sourceDir} to ${destinationDir}"
                     sh "rsync -av --exclude='.git/' ${sourceDir}/ ${destinationDir}/"
                 }
             }
@@ -98,15 +96,16 @@ pipeline {
                     def deployDir = '/srv/jenkins/pt.googlecloudnetworking'
                     sh """
                     cd ${deployDir}
-                    echo "Stopping and deleting old pm2 process..."
+                    echo "Stopping and deleting old pm2 process 'gcpnetworking' if it exists..."
                     pm2 stop gcpnetworking || true
-                    pm2 delete gcpnetworking || true 
+                    pm2 delete gcpnetworking || true
                     echo "Starting new pm2 process..."
                     pm2 start npm --name "gcpnetworking" -- start
+                    echo "Saving pm2 process list..."
                     pm2 save
                     """
                 }
             }
-        }
+        }  
     }
 }
