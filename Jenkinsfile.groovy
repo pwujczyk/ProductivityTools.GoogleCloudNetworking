@@ -50,6 +50,15 @@ pipeline {
             }
         }
 
+        stage('Build Application') {
+            steps {
+                script {
+                    echo "Building the Next.js application for production..."
+                    sh 'npm run build'
+                }
+            }
+        }
+
          stage('DeleteAllconfigurationDir') {
             steps {
                  script {
