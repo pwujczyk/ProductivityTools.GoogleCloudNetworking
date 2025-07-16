@@ -81,9 +81,11 @@ pipeline {
          stage('start page') {
             steps {
                 script{
-                    sh 'pm2 start npm --name "gcpnetworking" -- start
+                    sh '''
+                    pm2 start npm --name "gcpnetworking" -- start
                     pm2 save
-                    pm2 startup systemd'
+                    pm2 startup systemd
+                    '''
                 }
             }
         }  
