@@ -102,7 +102,7 @@ pipeline {
          stage('start page') {
             steps {
                 script{
-                    def deployDir = '/srv/jenkins/pt.googlecloudnetworking'
+                    def deployDir = '/srv/jenkins/PT.GoogleCloudNetworking'
                     sh """
                     cd ${deployDir}
                     echo "Stopping and deleting old pm2 process 'gcpnetworking' if it exists..."
