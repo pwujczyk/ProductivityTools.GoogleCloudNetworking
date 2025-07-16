@@ -62,4 +62,7 @@ different commants
 
 ```
 sudo su - jenkins
+
+ pm2 logs gcpnetworking --lines 100 --nostream
+
 ```
