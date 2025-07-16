@@ -50,6 +50,15 @@ pipeline {
             }
         }
 
+        stage('build') {
+            steps {
+                script {
+                    echo "Installing NPM dependencies..."
+                    sh 'npm run build'
+                }
+            }
+        }
+
          stage('DeleteAllconfigurationDir') {
             steps {
                  script {
