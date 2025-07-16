@@ -100,6 +100,7 @@ pipeline {
             steps {
                 script{
                     sh '''
+                    pm2 delete gcpnetworking
                     pm2 start npm --name "gcpnetworking" -- start
                     pm2 save
                     '''
