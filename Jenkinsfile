@@ -41,6 +41,15 @@ pipeline {
             }
         }
 
+        stage('NPM Install') {
+            steps {
+                script {
+                    echo "Installing NPM dependencies..."
+                    sh 'npm install'
+                }
+            }
+        }
+
          stage('DeleteAllconfigurationDir') {
             steps {
                  script {
