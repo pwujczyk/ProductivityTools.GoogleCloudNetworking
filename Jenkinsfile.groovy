@@ -9,6 +9,17 @@ pipeline {
             }
         }
 
+        stage('Verify Node.js and NPM versions') {
+            steps {
+                script {
+                    echo "Verifying Node.js and NPM versions..."
+                    sh 'node -v'
+                    sh 'npm -v'
+                    echo "Node.js and NPM versions verified."
+                }
+            }
+        }
+
         stage('Identify User') {
             steps {
                 script {
@@ -89,13 +100,13 @@ pipeline {
                     cd ${deployDir}
                     echo "Stopping and deleting old pm2 process..."
                     pm2 stop gcpnetworking || true
-                    pm2 delete gcpnetworking || true
+                    pm2 delete gcpnetworking || true 
                     echo "Starting new pm2 process..."
                     pm2 start npm --name "gcpnetworking" -- start
                     pm2 save
                     """
                 }
             }
-        }  
+        }
     }
 }

@@ -56,6 +56,10 @@ sudo usermod -aG jenkins_page_group pawel
 sudo chgrp jenkins_page_group /srv/jenkins/
 sudo chmod g+wrx /srv/jenkins/
  sudo chmod -R  g+wr /srv/jenkins/
+````
 
+different commants
 
-
+```
+sudo su - jenkins
+```
