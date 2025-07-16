@@ -69,11 +69,14 @@ pipeline {
         stage('Copy the page') {
             steps {
                 script{
-                    def sourceDir='/var/lib/jenkins/workspace/PT.GoogleCloudNetworking'
-                    def destinationDir='/srv/jenkins/'
-                    //sh "mkdir -p ${destinationDir}"
+                    def sourceDir = '/var/lib/jenkins/workspace/PT.GoogleCloudNetworking'
+                    def destinationDir = '/srv/jenkins/pt.googlecloudnetworking'
+                    
+                    echo "Creating destination directory if it doesn't exist: ${destinationDir}"
+                    sh "mkdir -p ${destinationDir}"
 
-                    sh "rsync -av --exclude='.git/' ${sourceDir}/ ${destinationDir}"
+                    echo "Copying application files from ${sourceDir} to ${destinationDir}"
+                    sh "rsync -av --exclude='.git/' ${sourceDir}/ ${destinationDir}/"
                 }
             }
         }  
@@ -81,10 +84,16 @@ pipeline {
          stage('start page') {
             steps {
                 script{
-                    sh '''
+                    def deployDir = '/srv/jenkins/pt.googlecloudnetworking'
+                    sh """
+                    cd ${deployDir}
+                    echo "Stopping and deleting old pm2 process..."
+                    pm2 stop gcpnetworking || true
+                    pm2 delete gcpnetworking || true
+                    echo "Starting new pm2 process..."
                     pm2 start npm --name "gcpnetworking" -- start
                     pm2 save
-                    '''
+                    """
                 }
             }
         }  
