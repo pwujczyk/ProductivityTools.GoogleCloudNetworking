@@ -15,7 +15,7 @@ To make the functionality (**Intrusion detection and prevention** ) working foll
 
 GCP offers also NSI service. NSI service does similar thing, but **Intrusion detection and prevention** is managed service and NSI service allows to send packet to the 3rd party solution that user will configure.
 
-## Firewall endpoints (Intrusion detection and prevention) vs IDS Endpoints
+### Firewall endpoints (Intrusion detection and prevention) vs IDS Endpoints
 IDS endpoints are the Detection system and Firewall endpoint are prevention
 - Detection - Cloud will detect threat and inform on the dashboard but do not influence the traffic
 - Prevent - Clouw will prevent threat
