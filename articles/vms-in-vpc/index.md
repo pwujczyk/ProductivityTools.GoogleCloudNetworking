@@ -28,7 +28,7 @@ gcloud compute networks subnets create $SUB_NETWORK_NAME \
     --project=$PROJECT
 
 #Create vm1
-gcloud compute instances create vm1 \
+gcloud compute instances create VM1_NAME \
     --image-project=debian-cloud \
     --image-family=debian-11 \
     --machine-type=e2-micro \
@@ -38,7 +38,7 @@ gcloud compute instances create vm1 \
 
 
 
-gcloud compute instances delete vm1 \
+gcloud compute instances delete VM1_NAME \
     --zone=$ZONE \
     --project=$PROJECT \
     --quiet
