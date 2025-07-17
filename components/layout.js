@@ -13,12 +13,12 @@ function MenuRenderer({ nodes, path = '', level = 0 }) {
     <ul className={level === 0 ? styles.menuMainList : styles.menuSubList}>
       {nodes.map((node) => (
         <li
-          key={node.name}
+          key={node.path}
           className={level === 0 ? styles.menuMainItem : styles.menuSubItem}
         >
-          <Link href={`/articles${path}/${node.name}`}>{node.name}</Link>
-          {node.children && node.children.length > 0 && (
-            <MenuRenderer nodes={node.children} path={`${path}/${node.name}`} level={level + 1} />
+          <Link href={`/articles${level === 0 ? '' : path}/${node.path}`}>{node.title}</Link>
+          {node.childs && node.childs.length > 0 && (
+            <MenuRenderer nodes={node.childs} path={`${level === 0 ? '' : path}/${node.path}`} level={level + 1} />
           )}
         </li>
       ))}
@@ -27,6 +27,7 @@ function MenuRenderer({ nodes, path = '', level = 0 }) {
 }
 
 export default function Layout({ children, menu }) {
+  console.log("menu",menu)
   return (
     <div className={styles.container}>
       <Head>
