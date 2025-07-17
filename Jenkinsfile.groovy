@@ -50,10 +50,10 @@ pipeline {
             }
         }
 
-        stage('build') {
+        stage('Build Application') {
             steps {
                 script {
-                    echo "Installing NPM dependencies..."
+                    echo "Building the Next.js application for production..."
                     sh 'npm run build'
                 }
             }
@@ -87,11 +87,14 @@ pipeline {
         stage('Copy the page') {
             steps {
                 script{
-                    def sourceDir='/var/lib/jenkins/workspace/PT.GoogleCloudNetworking'
-                    def destinationDir='/srv/jenkins/'
-                    //sh "mkdir -p ${destinationDir}"
+                    def sourceDir = '/var/lib/jenkins/workspace/PT.GoogleCloudNetworking'
+                    def destinationDir = '/srv/jenkins/'
+                    
+                    echo "Creating destination directory if it doesn't exist: ${destinationDir}"
+                    sh "mkdir -p ${destinationDir}"
 
-                    sh "rsync -av --exclude='.git/' ${sourceDir}/ ${destinationDir}"
+                    echo "Copying application files (including node_modules) from ${sourceDir} to ${destinationDir}"
+                    sh "rsync -av --exclude='.git/' ${sourceDir}/ ${destinationDir}/"
                 }
             }
         }  
@@ -99,11 +102,17 @@ pipeline {
          stage('start page') {
             steps {
                 script{
-                    sh '''
-                    pm2 delete gcpnetworking
+                    def deployDir = '/srv/jenkins/PT.GoogleCloudNetworking'
+                    sh """
+                    cd ${deployDir}
+                    echo "Stopping and deleting old pm2 process 'gcpnetworking' if it exists..."
+                    pm2 stop gcpnetworking || true
+                    pm2 delete gcpnetworking || true
+                    echo "Starting new pm2 process..."
                     pm2 start npm --name "gcpnetworking" -- start
+                    echo "Saving pm2 process list..."
                     pm2 save
-                    '''
+                    """
                 }
             }
         }  
