@@ -1,8 +1,3 @@
----
-title: 'CLoud nat'
-date: '2020-01-01'
----
-
 # Firewalls rules in GCP
 
 GCP allows to create firewall rules in three places 
