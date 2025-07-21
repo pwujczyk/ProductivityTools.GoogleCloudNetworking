@@ -78,6 +78,10 @@ Commands
 ```
 gcloud beta network-security intercept-deployment-groups list
 gcloud beta network-security intercept-deployment-groups describe pwx1 --location=global
+
+gcloud beta network-security intercept-deployment-groups list
+gcloud network-security intercept-deployments describe pwx1 --location=us-central1-c
+gcloud beta network-security intercept-deployment-groups create pxc1 --location global --project cn-fe-playground --network ipv6-only --description pwdescription
 ```
 
 

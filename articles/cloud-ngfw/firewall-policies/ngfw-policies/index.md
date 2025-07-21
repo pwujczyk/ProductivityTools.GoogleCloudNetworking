@@ -1,4 +1,4 @@
-# Firewal policy details
+# Firewall policy details
 
 List of the Filewall rules with the options to create new one
 
