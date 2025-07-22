@@ -1,4 +1,4 @@
-# Virtual Private Cloud (VPC)
+# Virtual Private Cloud (VPC) networks
 
 TL;DR; VPC is virtual version of a physical network (cables). 
 
