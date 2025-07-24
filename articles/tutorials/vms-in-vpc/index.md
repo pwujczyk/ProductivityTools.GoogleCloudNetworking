@@ -1,7 +1,9 @@
 # Carating 2 VMs in one VPC
 This tutorial shows how to create 2 vms in VPC 
 
+```
 export PROJECT="pwujczyklearning"
+export PROJECT="firewallorder"
 export REGION="us-central1"
 export ZONE="us-central1-a"
 
@@ -10,15 +12,17 @@ export VM2_NAME='vm2-client'
 
 export NETWORK_NAME="$USER-secure-tags-test"
 export SUB_NETWORK_NAME="$USER-secure-tags-test-subnetwork"
-
+```
 
 
 
 # create network
+```
 gcloud compute networks create $NETWORK_NAME \
     --subnet-mode=custom \
     --mtu=1460 \
     --project=$PROJECT
+```
 
 # create subnetwork
 gcloud compute networks subnets create $SUB_NETWORK_NAME \
