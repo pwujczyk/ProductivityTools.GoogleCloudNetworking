@@ -57,29 +57,32 @@ gcloud compute instances create $VM2_NAME \
 
 ## Removing resources
 
-\# **Delete VM2 - Server**
 
+```
+# Delete VM2 - Server
 gcloud compute instances delete $VM2_NAME \
     --zone=$ZONE \
     --project=$PROJECT \
     --quiet
-
-\# **Delete VM1 - Client**
-
+```
+```
+# Delete VM1 - Client
 gcloud compute instances delete $VM1_NAME \
     --zone=$ZONE \
     --project=$PROJECT \
     --quiet
-
-\# **Delete subnet**
-
+```
+```
+# Delete subnet
 gcloud compute networks subnets delete $SUB_NETWORK_NAME \
     --region=$REGION \
     --project=$PROJECT \
     --quiet
-
-\# **Delete network**
+```
+```
+# Delete network
 
 gcloud compute networks delete $NETWORK_NAME \
     --project=$PROJECT \
     --quiet
+```
