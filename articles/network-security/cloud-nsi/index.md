@@ -1,4 +1,6 @@
-# Cloud Network Security Integration
+# Cloud NSI
+
+```Cloud Network Security Integration```
 
 [Cloud documentation](https://cloud.google.com/network-security-integration/docs/nsi-overview)
 
@@ -82,6 +84,11 @@ gcloud beta network-security intercept-deployment-groups describe pwx1 --locatio
 gcloud beta network-security intercept-deployment-groups list
 gcloud network-security intercept-deployments describe pwx1 --location=us-central1-c
 gcloud beta network-security intercept-deployment-groups create pxc1 --location global --project cn-fe-playground --network ipv6-only --description pwdescription
+
+
+
+gcloud beta network-security mirroring-deployment-groups create pxm1 --location global --project cn-fe-playground --network ipv6-only --description pwdescription
+
 ```
 
 

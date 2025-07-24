@@ -1,5 +1,5 @@
 
-VM without any Firewall rules - SSH & Ping
+# SSH rule for VM
 
 This short tutorial shows that we need to create additional rule for the VPC firewall to access vm through SSH
 

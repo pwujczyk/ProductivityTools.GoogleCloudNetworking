@@ -1,4 +1,4 @@
-# 2 VMs in VPC
+# Carating 2 VMs in one VPC
 This tutorial shows how to create 2 vms in VPC 
 
 export PROJECT="pwujczyklearning"

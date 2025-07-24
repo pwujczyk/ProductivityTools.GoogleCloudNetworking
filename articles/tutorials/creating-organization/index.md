@@ -1,5 +1,8 @@
-# Drop 
-Only drop of steps not ordered:
+# Creating organization 
+
+This page lists only drop steps that are not ordered. When second organizatio will be created I needs to be improved.
+
+The starting point for the organization is [this](https://cloud.google.com/resource-manager/docs/creating-managing-organization) page
 
 - [Chose Cloud identity](https://cloud.google.com/resource-manager/docs/creating-managing-organization)
 - Domain is required
@@ -16,3 +19,17 @@ You do not have the required "resourcemanager.projects.create" permission to cre
 ![add-admin-to-admin](./images/add-admin-to-admin.png)
 ![roles-required](./images/roles-required.png)
 
+
+
+Organization is managed under a link https://admin.google.com/
+
+In the GCP permissions issue could occur than make sure that user that you are logged in is a super admin.
+
+Go to the admin.google.com to the Admin roles
+
+![admin-roles](./images/admin-roles.png)
+
+
+Assign user to the super admin role.
+
+![super-admin](./images/super-admin.png)
