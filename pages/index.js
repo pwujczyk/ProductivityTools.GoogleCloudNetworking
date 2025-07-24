@@ -4,7 +4,6 @@ import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 
 import { getMenuTree, getSortedPostsData } from "../lib/posts";
-import { getArticleData } from "../lib/articles";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
