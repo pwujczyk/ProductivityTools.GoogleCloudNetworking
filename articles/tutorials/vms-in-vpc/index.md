@@ -6,12 +6,13 @@ export PROJECT="pwujczyklearning"
 export PROJECT="firewallorder"
 export REGION="us-central1"
 export ZONE="us-central1-a"
+export $Ne
 
 export VM1_NAME='vm1-webserver'
 export VM2_NAME='vm2-client'
 
-export NETWORK_NAME="$USER-secure-tags-test"
-export SUB_NETWORK_NAME="$USER-secure-tags-test-subnetwork"
+export NETWORK_NAME="$USER-2vm-test"
+export SUB_NETWORK_NAME="$USER-2vm-test-subnetwork"
 ```
 
 
@@ -24,7 +25,7 @@ gcloud compute networks create $NETWORK_NAME \
     --project=$PROJECT
 ```
 
-# create subnetwork
+\# create subnetwork
 gcloud compute networks subnets create $SUB_NETWORK_NAME \
     --region=$REGION \
     --network=$NETWORK_NAME \
