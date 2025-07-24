@@ -17,16 +17,15 @@ export SUB_NETWORK_NAME="$USER-2vm-test-subnetwork"
 ```
 
 
-
-\# **Create network**
 ```
+# Create network
 gcloud compute networks create $NETWORK_NAME \
     --subnet-mode=custom \
     --mtu=1460 \
     --project=$PROJECT
 ```
-
-\# **Create subnetwork**
+```
+# Create subnetwork
 
 gcloud compute networks subnets create $SUB_NETWORK_NAME \
     --region=$REGION \
@@ -34,8 +33,9 @@ gcloud compute networks subnets create $SUB_NETWORK_NAME \
     --range=10.0.0.0/27 \
     --enable-private-ip-google-access \
     --project=$PROJECT
-
-\# **Create VM1 - server**
+```
+```
+# Create VM1 - server
 
 gcloud compute instances create $VM1_NAME \
     --image-project=debian-cloud \
@@ -44,8 +44,9 @@ gcloud compute instances create $VM1_NAME \
     --zone=$ZONE \
     --network-interface="subnet=$SUB_NETWORK_NAME,no-address" \
     --project=$PROJECT 
-
-\# **Create VM2 - client**
+```
+```
+# Create VM2 - client
 
 gcloud compute instances create $VM2_NAME \
     --image-project=debian-cloud \
@@ -54,7 +55,7 @@ gcloud compute instances create $VM2_NAME \
     --zone=$ZONE \
     --network-interface="subnet=$SUB_NETWORK_NAME,no-address" \
     --project=$PROJECT 
-
+```
 ## Removing resources
 
 
