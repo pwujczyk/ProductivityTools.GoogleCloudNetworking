@@ -1,8 +1,10 @@
 # Carating 2 VMs in one VPC
-This tutorial shows how to create 2 vms in VPC 
+This tutorial shows how to create 2 VMs in VPC 
 
-\# variables
+## Creating resources
+
 ```
+# variables
 export PROJECT="pwujczyklearning"
 export PROJECT="firewallorder"
 export REGION="us-central1"
