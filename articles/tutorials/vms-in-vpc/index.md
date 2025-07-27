@@ -35,16 +35,6 @@ gcloud compute networks subnets create $SUB_NETWORK_NAME \
     --enable-private-ip-google-access \
     --project=$PROJECT
 ```
-```
-# Create VM1 - empty
-gcloud compute instances create $VM0_NAME \
-    --image-project=debian-cloud \
-    --image-family=debian-11 \
-    --machine-type=e2-micro \
-    --zone=$ZONE \
-    --network-interface="subnet=$SUB_NETWORK_NAME,no-address" \
-    --project=$PROJECT 
-```
 
 # Create SSH to be able to connect to VM
 ```
@@ -57,9 +47,22 @@ gcloud compute firewall-rules create ssh-allow \
 --project=$PROJECT 
 ```
 
+```
+# Create VM1 - empty
+gcloud compute instances create $VM0_NAME \
+    --image-project=debian-cloud \
+    --image-family=debian-11 \
+    --machine-type=e2-micro \
+    --zone=$ZONE \
+    --network-interface="subnet=$SUB_NETWORK_NAME,no-address" \
+    --project=$PROJECT 
+```
+
+
+
 # Create VM1 - web-server
 ```
-gcloud compute instances create VM1_NAME \
+gcloud compute instances create $VM1_NAME \
     --image-project=debian-cloud \
     --image-family=debian-11 \
     --machine-type=e2-micro \

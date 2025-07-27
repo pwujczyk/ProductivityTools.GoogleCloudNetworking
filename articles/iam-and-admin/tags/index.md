@@ -35,9 +35,8 @@ export PROJECT="firewallorder"
 export REGION="us-central1"
 export ZONE="us-central1-a"
 
-export VM0_NAME='vm1-empty'
+
 export VM1_NAME='vm1-webserver-with-external-ip'
-export VM2_NAME='vm2-client'
 
 export NETWORK_NAME="$USER-2vm-test"
 export SUB_NETWORK_NAME="$USER-2vm-test-subnetwork"
@@ -50,8 +49,7 @@ gcloud compute networks create $NETWORK_NAME \
     --subnet-mode=custom \
     --mtu=1460 \
     --project=$PROJECT
-```
-```
+
 # Create subnetwork
 gcloud compute networks subnets create $SUB_NETWORK_NAME \
     --region=$REGION \
@@ -59,10 +57,8 @@ gcloud compute networks subnets create $SUB_NETWORK_NAME \
     --range=10.0.0.0/27 \
     --enable-private-ip-google-access \
     --project=$PROJECT
-```
 
 # Create SSH to be able to connect to VM
-```
 gcloud compute firewall-rules create ssh-allow \
 --direction=INGRESS \
 --priority=1000 \
@@ -70,10 +66,8 @@ gcloud compute firewall-rules create ssh-allow \
 --action=ALLOW \
 --rules=tcp:22 \
 --project=$PROJECT 
-```
 
 # Create VM1 - web-server
-```
 gcloud compute instances create $VM1_NAME \
     --image-project=debian-cloud \
     --image-family=debian-11 \
@@ -95,25 +89,22 @@ gcloud compute instances create $VM1_NAME \
 
 ## Removing resources
 
-
-
-
 ```
 # Delete VM1 - Client
 gcloud compute instances delete $VM1_NAME \
     --zone=$ZONE \
     --project=$PROJECT \
     --quiet
-```
 
-```
+# Delete ssh firewall rule
+gcloud compute firewall-rules delete ssh-allow --quiet
+
 # Delete subnet
 gcloud compute networks subnets delete $SUB_NETWORK_NAME \
     --region=$REGION \
     --project=$PROJECT \
     --quiet
-```
-```
+
 # Delete network
 gcloud compute networks delete $NETWORK_NAME \
     --project=$PROJECT \
