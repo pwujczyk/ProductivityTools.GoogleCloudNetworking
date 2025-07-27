@@ -1,4 +1,4 @@
-# Carating 2 VMs in one VPC
+# Carating 2 VMs VPC
 This tutorial shows how to create 2 VMs in VPC 
 
 ## Creating resources
@@ -28,7 +28,6 @@ gcloud compute networks create $NETWORK_NAME \
 ```
 ```
 # Create subnetwork
-
 gcloud compute networks subnets create $SUB_NETWORK_NAME \
     --region=$REGION \
     --network=$NETWORK_NAME \
@@ -38,7 +37,6 @@ gcloud compute networks subnets create $SUB_NETWORK_NAME \
 ```
 ```
 # Create VM1 - server
-
 gcloud compute instances create $VM1_NAME \
     --image-project=debian-cloud \
     --image-family=debian-11 \
@@ -49,7 +47,6 @@ gcloud compute instances create $VM1_NAME \
 ```
 ```
 # Create VM2 - client
-
 gcloud compute instances create $VM2_NAME \
     --image-project=debian-cloud \
     --image-family=debian-11 \
@@ -84,7 +81,6 @@ gcloud compute networks subnets delete $SUB_NETWORK_NAME \
 ```
 ```
 # Delete network
-
 gcloud compute networks delete $NETWORK_NAME \
     --project=$PROJECT \
     --quiet
