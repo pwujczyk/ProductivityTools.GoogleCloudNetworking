@@ -6,3 +6,4 @@ Next Generation Firwall allows to filter trafic based on the Fully Qualified Dom
 When to use:
 - If we have under one domain multiple sites (google.com/maps, google.com)
 - If site that we would like to block is hosted under multiple IPs or the IP of the page changes 
+

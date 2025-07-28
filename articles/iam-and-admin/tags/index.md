@@ -81,8 +81,6 @@ gcloud compute instances create $VM1_NAME \
         sudo systemctl start apache2
         sudo systemctl enable apache2
         echo "<h1>Welcome to your new Apache server on GCP!</h1><h3>Machine: '$VM_NAME'</h3>" | sudo tee /var/www/html/index.html'
-
-
 ```
 
 
