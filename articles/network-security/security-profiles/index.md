@@ -1,4 +1,4 @@
-# Security profiles [O]
+# Security profiles
 
 * Security profile can be created on the organization level (no project, nor folder)
 * It is placed under Network Security \> Common components \> Security profiles  
