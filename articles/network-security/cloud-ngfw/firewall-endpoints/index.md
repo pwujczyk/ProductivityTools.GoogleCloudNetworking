@@ -1,13 +1,32 @@
 # Firewall endpoints
 
 From google [docs](https://cloud.google.com/firewall/docs/about-firewall-endpoints):
-- Firewall endpoints perform Layer 7 firewall inspection on the intercepted traffic.
+- Firewall endpoints is a resource to configure Layer 7 firewall inspection on the intercepted traffic.
 
 Firewall endpoint is one of the component of the **Intrusion detection and prevention** service. It redirects traffic to the Palo Alto software that performs packet analysis (malware, spyware, and command-and-control attacks). 
 
 To make the functionality (**Intrusion detection and prevention** ) working following services needs to be configured:
-- Firewall endpoint
-- [Security profile](https://cloud.google.com/firewall/docs/about-intrusion-prevention)
+
+![networking-firewall-endpoint](./images/networking-firewall-endpoint.png)
+
+- Firewall endpoint - first firewall endpoint on the organization level needs to be configured and one or more VPC needs to be associated with it 
+- [Security profile](https://cloud.google.com/firewall/docs/about-intrusion-prevention) - Next security profile needs to be confirgured with the **Cloud NGFW Enterpise option**
+
+![security-profile](./images/security-profile.png)
+
+- Firewall policy rule - **Proceed L7 inspection**
+
+![firewall-rule](./images/firewall-rule.png)
+
+
+
+### Firewall endpoint [org level] configuration
+    - Region
+    - Zone
+    - Name - px-firewallendpoint
+    - Billing project
+    - [Association to project]
+    - [Association to network]
 
 ## Similar products
 
@@ -37,3 +56,10 @@ IDS endpoints are the Detection system and Firewall endpoint are prevention
 ### Firewall endpoint details
 
 ![firewall-endpoint-details](./images/firewall-endpoint-details.png)
+
+
+## Firewall Endpoint configuration
+
+To 
+
+
