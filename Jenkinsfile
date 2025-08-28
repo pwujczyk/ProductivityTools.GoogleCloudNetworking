@@ -41,7 +41,7 @@ pipeline {
             }
         }
 
-        stage('NPM Install') {
+        stage('NPM Installx') {
             steps {
                 script {
                     echo "Installing NPM dependencies..."
