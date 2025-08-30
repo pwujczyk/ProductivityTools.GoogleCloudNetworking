@@ -88,7 +88,7 @@ pipeline {
             steps {
                 script{
                     def sourceDir='/var/lib/jenkins/workspace/PT.GoogleCloudNetworking'
-                    def destinationDir='/srv/jenkins/'
+                    def destinationDir='/srv/jenkins/pt.googlecloudnetworking'
                     //sh "mkdir -p ${destinationDir}"
 
                     sh "rsync -av --exclude='.git/' ${sourceDir}/ ${destinationDir}"
@@ -110,6 +110,7 @@ pipeline {
             steps {
                 script{
                     sh '''
+                    cd /srv/jenkins/pt.googlecloudnetworking
                     if pm2 l | grep -q gcpnetworking; then
                         echo "gcpnetworking process found. Deleting it before starting a new one."
                         pm2 delete gcpnetworking
