@@ -106,19 +106,30 @@ pipeline {
             }
         }  
 
-          stage('start page') {
+         stage('start page') {
             steps {
                 script{
                     sh '''
+                    # Ustawienie zmiennej PM2, aby działała globalnie
+                    export PM2_HOME="/home/pawel/.pm2" # lub inna centralna ścieżka, np. /var/lib/pm2
+
+                    # Przejdź do katalogu aplikacji
                     cd /srv/jenkins/pt.googlecloudnetworking
-                    if pm2 l | grep -q gcpnetworking; then
+
+                    # Sprawdź, czy proces istnieje, używając pm2 list
+                    pm2 list | grep -q gcpnetworking
+                    
+                    if [ $? -eq 0 ]; then
                         echo "gcpnetworking process found. Deleting it before starting a new one."
                         pm2 delete gcpnetworking
                     else
                         echo "gcpnetworking process not found. Starting a new one."
                     fi
                     
+                    # Uruchom ponownie aplikację
                     pm2 start npm --name "gcpnetworking" -- start
+                    
+                    # Zapisz stan procesów PM2
                     pm2 save
                     '''
                 }
