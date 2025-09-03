@@ -1,4 +1,4 @@
-# Security profiles
+# Security profiles [O]
 
 * This is feature for organization  
 * It is placed under Network Security \> Common components \> Security profiles  
