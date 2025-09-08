@@ -26,3 +26,7 @@ When we check the details of the traffic we see that the destination is the [log
 
 
 ![google-service](./images/google-service.png)
+
+If we filter google api the flow logs should be empty
+
+![google-api-filtered](./images/google-api-filtered.png)
