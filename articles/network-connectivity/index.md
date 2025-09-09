@@ -23,13 +23,12 @@ export SUB_NETWORK_NAME2="$USER-vpc2-test-subnetwork"
 
 
 ```
-# Create network
 gcloud compute networks create $NETWORK_NAME1 \
     --subnet-mode=custom \
     --mtu=1460 \
     --project=$PROJECT
 
-gcloud compute networks subnets create $SUB_NETWORK_NAME2 \
+gcloud compute networks subnets create $SUB_NETWORK_NAME1 \
     --region=$REGION \
     --network=$NETWORK_NAME1 \
     --range=10.0.0.0/27 \
@@ -74,7 +73,7 @@ gcloud compute instances create $VM1_NAME \
     --network-interface="subnet=$SUB_NETWORK_NAME1,no-address" \
     --project=$PROJECT 
 
-gcloud compute instances create $VM1_NAME \
+gcloud compute instances create $VM2_NAME \
     --image-project=debian-cloud \
     --image-family=debian-11 \
     --machine-type=e2-micro \
