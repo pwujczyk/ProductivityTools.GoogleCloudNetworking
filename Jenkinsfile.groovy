@@ -50,10 +50,10 @@ pipeline {
             }
         }
 
-        stage('Build Application') {
+        stage('build') {
             steps {
                 script {
-                    echo "Building the Next.js application for production..."
+                    echo "Installing NPM dependencies..."
                     sh 'npm run build'
                 }
             }
@@ -87,14 +87,21 @@ pipeline {
         stage('Copy the page') {
             steps {
                 script{
-                    def sourceDir = '/var/lib/jenkins/workspace/PT.GoogleCloudNetworking'
-                    def destinationDir = '/srv/jenkins/'
-                    
-                    echo "Creating destination directory if it doesn't exist: ${destinationDir}"
-                    sh "mkdir -p ${destinationDir}"
+                    def sourceDir='/var/lib/jenkins/workspace/PT.GoogleCloudNetworking'
+                    def destinationDir='/srv/jenkins/'
+                    //sh "mkdir -p ${destinationDir}"
 
-                    echo "Copying application files (including node_modules) from ${sourceDir} to ${destinationDir}"
-                    sh "rsync -av --exclude='.git/' ${sourceDir}/ ${destinationDir}/"
+                    sh "rsync -av --exclude='.git/' ${sourceDir}/ ${destinationDir}"
+                }
+            }
+        }  
+
+         stage('pm2 list') {
+            steps {
+                script{
+                    sh '''
+                    pm2 l
+                    '''
                 }
             }
         }  
@@ -102,17 +109,17 @@ pipeline {
          stage('start page') {
             steps {
                 script{
-                    def deployDir = '/srv/jenkins/PT.GoogleCloudNetworking'
-                    sh """
-                    cd ${deployDir}
-                    echo "Stopping and deleting old pm2 process 'gcpnetworking' if it exists..."
-                    pm2 stop gcpnetworking || true
-                    pm2 delete gcpnetworking || true
-                    echo "Starting new pm2 process..."
+                    sh '''
+                    if pm2 l | grep -q gcpnetworking; then
+                        echo "gcpnetworking process found. Deleting it before starting a new one."
+                        pm2 delete gcpnetworking
+                    else
+                        echo "gcpnetworking process not found. Starting a new one."
+                    fi
+                    
                     pm2 start npm --name "gcpnetworking" -- start
-                    echo "Saving pm2 process list..."
                     pm2 save
-                    """
+                    '''
                 }
             }
         }  
