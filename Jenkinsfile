@@ -106,11 +106,17 @@ pipeline {
             }
         }  
 
-         stage('start page') {
+          stage('start page') {
             steps {
                 script{
                     sh '''
-                    pm2 delete gcpnetworking
+                    if pm2 l | grep -q gcpnetworking; then
+                        echo "gcpnetworking process found. Deleting it before starting a new one."
+                        pm2 delete gcpnetworking
+                    else
+                        echo "gcpnetworking process not found. Starting a new one."
+                    fi
+                    
                     pm2 start npm --name "gcpnetworking" -- start
                     pm2 save
                     '''
