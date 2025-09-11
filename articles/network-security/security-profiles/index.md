@@ -5,8 +5,10 @@
 
 ## Security profile
 
+Security profile is a way to configure additional functionalities of the Next Generation Firewall. 
+
 * There are two types  of the security profiles  
-  * Threat prevention 
+  * [Threat prevention](./../services//threat-prevention/index.md) 
     * Intercept (In-band) - this flow intercept the traffic and validates if it is not risky if yes then blocks the traffic
     * Mirroring (Out-of band) - tihs flow mirrors the traffic but did not block it. It can be used for the post traffic analysis.
   * URL filtering - blocks request to particular URLs

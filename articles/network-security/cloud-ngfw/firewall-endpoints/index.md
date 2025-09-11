@@ -5,39 +5,13 @@ From google [docs](https://cloud.google.com/firewall/docs/about-firewall-endpoin
 
 Firewall endpoint is one of the component of the **Intrusion detection and prevention** service. It redirects traffic to the Palo Alto software that performs packet analysis (malware, spyware, and command-and-control attacks). 
 
-To make the functionality (**Intrusion detection and prevention** ) working following services needs to be configured:
+When Endpoint is created the Google Internal project with the Palo Alto service on the VMs is created. That is why Endpoint is a zonal resource. 
 
-![networking-firewall-endpoint](./images/networking-firewall-endpoint.png)
+To redirect the traffic from given network to Threat prevension service, user needs to create Firewall Endpoint Association. Unfortunatelly as this is zonal resource, if customer covers all zones in the region with the Threat prevention, they need to confugre **Firewall endpoint association** multiple times.
 
-- Firewall endpoint - first firewall endpoint on the organization level needs to be configured and one or more VPC needs to be associated with it 
-- [Security profile](https://cloud.google.com/firewall/docs/about-intrusion-prevention) - Next security profile needs to be confirgured with the **Cloud NGFW Enterpise option**
-
-![security-profile](./images/security-profile.png)
-
-- Firewall policy rule - **Proceed L7 inspection**
-
-![firewall-rule](./images/firewall-rule.png)
-
-
-
-### Firewall endpoint [org level] configuration
-    - Region
-    - Zone
-    - Name - px-firewallendpoint
-    - Billing project
-    - [Association to project]
-    - [Association to network]
-
-## Similar products
-
-### Firewall endpoints (Intrusion detection and prevention) vs NSI (Network Service integratoin)
-
-GCP offers also NSI service. NSI service does similar thing, but **Intrusion detection and prevention** is managed service and NSI service allows to send packet to the 3rd party solution that user will configure.
-
-### Firewall endpoints (Intrusion detection and prevention) vs IDS Endpoints
-IDS endpoints are the Detection system and Firewall endpoint are prevention
-- Detection - Cloud will detect threat and inform on the dashboard but do not influence the traffic
-- Prevent - Clouw will prevent threat
+When **Threat prevention is configured** user can validate the functionality by:
+- monitoring dropped connections (when risky packet will be detect)
+- monitoring the firewall_threat logs in the Logs Explorer
 
 ## Screens
 
@@ -57,9 +31,9 @@ IDS endpoints are the Detection system and Firewall endpoint are prevention
 
 ![firewall-endpoint-details](./images/firewall-endpoint-details.png)
 
+### Firewall_threat log explorer
 
-## Firewall Endpoint configuration
+![log-explorer](./images/log-explorer.png)
 
-To 
 
 
