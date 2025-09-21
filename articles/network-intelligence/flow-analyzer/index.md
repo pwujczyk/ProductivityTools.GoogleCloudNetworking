@@ -1,6 +1,6 @@
 # Flow Analyzer
 
-Flow Analyzer lets you perform opinionated network traffic analysis with 5-tuple granularity (source IP, destination IP, source port, destination port, and protocol).
+Flow analyzer displays information about bytes that travel through the network. It allows to chose google resource and analyze how much data is send and received by given resource. 
 
 To use it **Flow logs** needs to be enabled for the network.
 
