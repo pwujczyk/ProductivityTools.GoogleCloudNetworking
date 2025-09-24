@@ -41,7 +41,7 @@ pipeline {
             }
         }
 
-        stage('NPM Install') {
+        stage('NPM Installx') {
             steps {
                 script {
                     echo "Installing NPM dependencies..."
@@ -88,7 +88,7 @@ pipeline {
             steps {
                 script{
                     def sourceDir='/var/lib/jenkins/workspace/PT.GoogleCloudNetworking'
-                    def destinationDir='/srv/jenkins/'
+                    def destinationDir='/srv/jenkins/pt.googlecloudnetworking'
                     //sh "mkdir -p ${destinationDir}"
 
                     sh "rsync -av --exclude='.git/' ${sourceDir}/ ${destinationDir}"
@@ -100,16 +100,20 @@ pipeline {
             steps {
                 script{
                     sh '''
+                    export PM2_HOME="/home/pawel/.pm2"
                     pm2 l
                     '''
                 }
             }
         }  
 
-          stage('start page') {
+        stage('start page') {
             steps {
                 script{
                     sh '''
+                    export PM2_HOME="/home/pawel/.pm2" # lub inna centralna ścieżka, np. /var/lib/pm2
+
+                    cd /srv/jenkins/pt.googlecloudnetworking
                     if pm2 l | grep -q gcpnetworking; then
                         echo "gcpnetworking process found. Deleting it before starting a new one."
                         pm2 delete gcpnetworking
