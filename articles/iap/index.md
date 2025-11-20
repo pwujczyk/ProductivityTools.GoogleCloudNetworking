@@ -1,8 +1,8 @@
 # Identity Aware Proxy
 
-We can access securely VM using ssh even when VM does not have public IP.
+We can access securely VM using ssh even when VM does not have public IP. 
 
-![VM](./images/VM.png)
+![VM](./images/vm.png)
 
 To do it we need to create firewall rule that allows traffic from internal google services that act as a proxy to our servers. 
 
@@ -16,6 +16,5 @@ When rule is created we can use the command to open ssh connection.
 ```
 gcloud compute ssh iam-vm --tunnel-through-iap --zone us-central1-a
 ```
-
 
 ![connection-sucessfull](./images/connection-sucessfull.png)
