@@ -4,7 +4,7 @@
 
 We can access securely VM using ssh even when VM does not have public IP. 
 
-![VM](./images/vm.png)
+![VM](./images/vm1.png)
 
 To do it we need to create firewall rule that allows traffic from internal google services that act as a proxy to our servers. 
 
