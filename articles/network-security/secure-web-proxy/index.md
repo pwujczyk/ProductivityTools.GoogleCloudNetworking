@@ -2,7 +2,10 @@
 
 
 ## Subnet for the proxy
-Google does not run the proxy in your subnet, to use it we need to create special subnet in the network.
+Google does not run the proxy in your subnet, to use it we need to create special subnet in the network. 
+It means that we need always to have two sub-networks
+- one where VM will be placed
+- second only for the Web Proxy
 
 In the VPC details on the Subets tak, click **Add subnet**
 
@@ -18,6 +21,8 @@ The important configuration to select is **Regional Managed Proxy**.
 Service allow to securely connect to the internet from the VMs in the cloud.
 
 Typical scenario: We have VM without the external IP. That means that VM does not have access to the Internet. We do not want to assgn the IP as then VM would be exposed to attacks. 
+
+Secure web proxy is a regional service, that means if we have two subnetworks in different regions we need to create two secure web proxies.
 
 ![vm-without-external-ip](./images/vm-without-external-ip.png)
 
