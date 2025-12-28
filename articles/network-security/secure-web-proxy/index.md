@@ -56,7 +56,7 @@ When data in the DNS are put, the status of the certificate changes to active
 
 ![certificate-status-active](./images/certificate-status-active.png)
 
-## secure Web Proxy Policy
+## Secure Web Proxy Policy
 
 To allow VM to access internet we need to create policy.
 
@@ -70,7 +70,7 @@ source.ip=="10.0.0.5"
 ![swp-policy](./images/swp-policy.png)
 
 
-![assign-a-policy](./images/assign-a-policy/png)
+![assign-a-policy](./images/assign-a-policy.png)
 
 # VM Proxy server
 VM sill does not have the access to the internet, as we are missing proxy configuration.
