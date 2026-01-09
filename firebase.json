@@ -1,8 +1,7 @@
 {
   "hosting": {
     "site": "pt-networking",
-    "public": "out",
-    "cleanUrls": true,
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
