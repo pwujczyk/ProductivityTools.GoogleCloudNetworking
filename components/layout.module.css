@@ -7,12 +7,50 @@
 }
 
 .sidebar {
-  width: 260px;
+  width: 280px;
   flex-shrink: 0;
-  padding: 1rem 1rem 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
   border-right: 1px solid #eaeaea;
+  background-color: #f8fafc;
+}
+
+.sidebarHeader {
+  display: flex;
+  border-bottom: 1px solid #e2e8f0;
+  background-color: #fff;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 0.85rem 0.5rem;
+  border: none;
+  background: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.tabButton:hover {
+  color: #1e293b;
+  background-color: #f1f5f9;
+}
+
+.tabActive {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+  background-color: #f8fafc;
+}
+
+.menuContainer {
+  padding: 1rem 1rem 1rem 1.5rem;
   overflow-y: auto;
-  background-color: #f5f7fa;
+  flex-grow: 1;
 }
 
 .content {
