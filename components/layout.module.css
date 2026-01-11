@@ -4,6 +4,8 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  font-family: 'Roboto', 'Noto Sans', sans-serif;
+  color: #3c4043;
 }
 
 .sidebar {
@@ -11,100 +13,125 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #eaeaea;
-  background-color: #f8fafc;
+  background-color: #ffffff;
+  border-right: 1px solid #e8eaed;
 }
 
 .sidebarHeader {
   display: flex;
-  border-bottom: 1px solid #e2e8f0;
-  background-color: #fff;
+  padding: 8px 8px 0 8px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f3f4;
 }
 
 .tabButton {
   flex: 1;
-  padding: 0.85rem 0.5rem;
+  padding: 12px 4px;
   border: none;
   background: none;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #64748b;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #5f6368;
   cursor: pointer;
   transition: all 0.2s ease;
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
   text-transform: uppercase;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.8px;
 }
 
 .tabButton:hover {
-  color: #1e293b;
-  background-color: #f1f5f9;
+  color: #202124;
+  background-color: rgba(60, 64, 67, 0.04);
 }
 
 .tabActive {
-  color: #2563eb;
-  border-bottom-color: #2563eb;
-  background-color: #f8fafc;
+  color: #1a73e8;
+  border-bottom-color: #1a73e8;
 }
 
 .menuContainer {
-  padding: 1rem 1rem 1rem 1.5rem;
+  padding: 8px 0;
   overflow-y: auto;
   flex-grow: 1;
 }
 
 .content {
   flex-grow: 1;
-  padding: 2.5rem 3rem;
-  background: #fff;
+  padding: 40px 60px;
+  background: #ffffff;
   min-height: 100vh;
   overflow-y: auto;
   box-sizing: border-box;
 }
 
-.menuMainList {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.5rem 0;
-}
+/* Menu Rendering */
 
+.menuMainList,
 .menuSubList {
   list-style: none;
-  padding-left: 0.7rem;
+  padding: 0;
   margin: 0;
 }
 
-.menuMainItem {
-  font-weight: 600;
-  font-size: 1.08rem;
-  padding: 0.7rem 0 0.4rem 0;
-  margin-bottom: 0.2rem;
-  color: #222;
-  letter-spacing: 0.01em;
-}
-
-.menuMainItem a {
-  color: #222;
+.menuItemLink {
+  display: flex;
+  align-items: center;
+  padding: 6px 16px 6px 24px;
+  font-size: 13px;
+  color: #3c4043;
   text-decoration: none;
+  margin-right: 8px;
+  border-radius: 0 20px 20px 0;
+  transition: background-color 0.15s, color 0.15s;
+  line-height: 20px;
+  position: relative;
 }
 
-.menuMainItem a:hover {
-  color: #1565c0;
+.menuItemLink:hover {
+  background-color: #f1f3f4;
+}
+
+.activeLink {
+  background-color: #e8f0fe !important;
+  color: #185abc !important;
+  font-weight: 500 !important;
+}
+
+.menuMainItem {
+  margin-top: 4px;
+}
+
+.menuMainItem>a {
+  font-weight: 500;
 }
 
 .menuSubItem {
-  font-weight: 400;
-  font-size: 0.98rem;
-  padding: 0.2rem 0 0.2rem 0.3rem;
-  margin-bottom: 0.05rem;
-  color: #555;
+  margin-top: 1px;
 }
 
-.menuSubItem a {
-  color: #555;
-  text-decoration: none;
+/* Chevron Styling */
+.chevron {
+  width: 16px;
+  height: 16px;
+  margin-left: -20px;
+  margin-right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.menuSubItem a:hover {
-  color: #1976d2;
+.chevron::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #5f6368;
+  transform: rotate(-90deg);
+  transition: transform 0.2s;
 }
+
+/* If you want items to appear expandable, you'd toggle a class on the chevron.
+   For now, we'll just have static chevrons to match the look. */

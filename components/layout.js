@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 export const siteTitle = "Next.js Sample Website";
 
 function MenuRenderer({ nodes, parentPath = '', level = 0 }) {
+  const router = useRouter();
   if (!nodes || nodes.length === 0) {
     return null;
   }
@@ -14,15 +15,28 @@ function MenuRenderer({ nodes, parentPath = '', level = 0 }) {
   return (
     <ul className={level === 0 ? styles.menuMainList : styles.menuSubList}>
       {nodes.map((node) => {
-        const currentPath = `${parentPath}/${node.path}`;
+        const itemPath = `/articles${parentPath}/${node.path}`;
+        const isActive = router.asPath === itemPath;
+        // Indentation: 24px base for level 0, +16px per level
+        const paddingLeft = `${24 + level * 16}px`;
+
         return (
           <li
             key={node.path}
             className={level === 0 ? styles.menuMainItem : styles.menuSubItem}
           >
-            <Link href={`/articles${currentPath}`}>{node.title}</Link>
+            <Link
+              href={itemPath}
+              className={`${styles.menuItemLink} ${isActive ? styles.activeLink : ''}`}
+              style={{ paddingLeft }}
+            >
+              {node.childs && node.childs.length > 0 && (
+                <span className={styles.chevron}></span>
+              )}
+              {node.title}
+            </Link>
             {node.childs && node.childs.length > 0 && (
-              <MenuRenderer nodes={node.childs} parentPath={currentPath} level={level + 1} />
+              <MenuRenderer nodes={node.childs} parentPath={`${parentPath}/${node.path}`} level={level + 1} />
             )}
           </li>
         );
@@ -63,6 +77,9 @@ export default function Layout({ children, menu }) {
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
         <meta
           name="description"
           content="Learn how to build a personal website using Next.js"
