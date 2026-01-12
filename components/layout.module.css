@@ -50,6 +50,29 @@
   border-bottom-color: #1a73e8;
 }
 
+.actionButtons {
+  display: flex;
+  padding: 8px 16px;
+  gap: 12px;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.actionButton {
+  border: none;
+  background: none;
+  font-size: 11px;
+  font-weight: 500;
+  color: #1a73e8;
+  cursor: pointer;
+  padding: 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.actionButton:hover {
+  text-decoration: underline;
+}
+
 .menuContainer {
   padding: 8px 0;
   overflow-y: auto;
@@ -74,9 +97,15 @@
   margin: 0;
 }
 
-.menuItemLink {
+.menuItemRow {
+  position: relative;
   display: flex;
   align-items: center;
+}
+
+.menuItemLink {
+  display: block;
+  flex-grow: 1;
   padding: 6px 16px 6px 24px;
   font-size: 13px;
   color: #3c4043;
@@ -85,7 +114,6 @@
   border-radius: 0 20px 20px 0;
   transition: background-color 0.15s, color 0.15s;
   line-height: 20px;
-  position: relative;
 }
 
 .menuItemLink:hover {
@@ -102,7 +130,7 @@
   margin-top: 4px;
 }
 
-.menuMainItem>a {
+.menuMainItem>.menuItemRow>a {
   font-weight: 500;
 }
 
@@ -112,13 +140,23 @@
 
 /* Chevron Styling */
 .chevron {
-  width: 16px;
-  height: 16px;
-  margin-left: -20px;
-  margin-right: 4px;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
+  border-radius: 50%;
+  transition: background-color 0.15s;
+}
+
+.chevron:hover {
+  background-color: rgba(60, 64, 67, 0.1);
 }
 
 .chevron::before {
@@ -128,10 +166,11 @@
   height: 0;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  border-top: 4px solid #5f6368;
+  border-top: 4.5px solid #5f6368;
   transform: rotate(-90deg);
   transition: transform 0.2s;
 }
 
-/* If you want items to appear expandable, you'd toggle a class on the chevron.
-   For now, we'll just have static chevrons to match the look. */
+.chevronExpanded::before {
+  transform: rotate(0deg);
+}

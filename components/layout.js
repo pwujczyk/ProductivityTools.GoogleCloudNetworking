@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 export const siteTitle = "Next.js Sample Website";
 
-function MenuRenderer({ nodes, parentPath = '', level = 0 }) {
+function MenuRenderer({ nodes, parentPath = '', level = 0, expandedPaths, toggleExpand }) {
   const router = useRouter();
   if (!nodes || nodes.length === 0) {
     return null;
@@ -16,7 +16,11 @@ function MenuRenderer({ nodes, parentPath = '', level = 0 }) {
     <ul className={level === 0 ? styles.menuMainList : styles.menuSubList}>
       {nodes.map((node) => {
         const itemPath = `/articles${parentPath}/${node.path}`;
+        const absolutePath = `${parentPath}/${node.path}`;
         const isActive = router.asPath === itemPath;
+        const hasChildren = node.childs && node.childs.length > 0;
+        const isExpanded = expandedPaths.has(absolutePath);
+
         // Indentation: 24px base for level 0, +16px per level
         const paddingLeft = `${24 + level * 16}px`;
 
@@ -25,18 +29,31 @@ function MenuRenderer({ nodes, parentPath = '', level = 0 }) {
             key={node.path}
             className={level === 0 ? styles.menuMainItem : styles.menuSubItem}
           >
-            <Link
-              href={itemPath}
-              className={`${styles.menuItemLink} ${isActive ? styles.activeLink : ''}`}
-              style={{ paddingLeft }}
-            >
-              {node.childs && node.childs.length > 0 && (
-                <span className={styles.chevron}></span>
+            <div className={styles.menuItemRow}>
+              {hasChildren && (
+                <button
+                  className={`${styles.chevron} ${isExpanded ? styles.chevronExpanded : ''}`}
+                  onClick={() => toggleExpand(absolutePath)}
+                  style={{ left: `${paddingLeft.replace('px', '') - 20}px` }}
+                  aria-label={isExpanded ? "Collapse" : "Expand"}
+                />
               )}
-              {node.title}
-            </Link>
-            {node.childs && node.childs.length > 0 && (
-              <MenuRenderer nodes={node.childs} parentPath={`${parentPath}/${node.path}`} level={level + 1} />
+              <Link
+                href={itemPath}
+                className={`${styles.menuItemLink} ${isActive ? styles.activeLink : ''}`}
+                style={{ paddingLeft }}
+              >
+                {node.title}
+              </Link>
+            </div>
+            {hasChildren && isExpanded && (
+              <MenuRenderer
+                nodes={node.childs}
+                parentPath={absolutePath}
+                level={level + 1}
+                expandedPaths={expandedPaths}
+                toggleExpand={toggleExpand}
+              />
             )}
           </li>
         );
@@ -50,7 +67,46 @@ export default function Layout({ children, menu }) {
   const router = useRouter();
 
   const [activeTab, setActiveTab] = useState("");
+  const [expandedPaths, setExpandedPaths] = useState(new Set());
   const isMounted = useRef(false);
+
+  // Helper to get all nested paths that have children
+  const getAllExpandablePaths = useMemo(() => {
+    const paths = new Set();
+    const traverse = (nodes, currentPath) => {
+      nodes.forEach(node => {
+        const fullPath = `${currentPath}/${node.path}`;
+        if (node.childs && node.childs.length > 0) {
+          paths.add(fullPath);
+          traverse(node.childs, fullPath);
+        }
+      });
+    };
+    if (activeTab && menu[activeTab]) {
+      traverse(menu[activeTab], `/${activeTab}`);
+    }
+    return paths;
+  }, [activeTab, menu]);
+
+  const toggleExpand = (path) => {
+    setExpandedPaths(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(path)) {
+        newSet.delete(path);
+      } else {
+        newSet.add(path);
+      }
+      return newSet;
+    });
+  };
+
+  const expandAll = () => {
+    setExpandedPaths(new Set(getAllExpandablePaths));
+  };
+
+  const collapseAll = () => {
+    setExpandedPaths(new Set());
+  };
 
   useEffect(() => {
     if (!isMounted.current && categories.length > 0) {
@@ -72,6 +128,24 @@ export default function Layout({ children, menu }) {
       lastPathRef.current = router.asPath;
     }
   }, [router.asPath, categories]);
+
+  // Auto-expand parents of the current link on navigation
+  useEffect(() => {
+    if (router.asPath && router.asPath.startsWith('/articles/')) {
+      const pathParts = router.asPath.replace('/articles/', '').split('/');
+      const newExpanded = new Set(expandedPaths);
+      let current = '';
+      pathParts.forEach((part, index) => {
+        if (index < pathParts.length - 1) { // Don't expand the leaf itself if it's not a parent we know about
+          current += '/' + part;
+          newExpanded.add(current);
+        }
+      });
+      if (newExpanded.size !== expandedPaths.size) {
+        setExpandedPaths(newExpanded);
+      }
+    }
+  }, [router.asPath]);
 
   return (
     <div className={styles.container}>
@@ -105,9 +179,18 @@ export default function Layout({ children, menu }) {
             </button>
           ))}
         </div>
+        <div className={styles.actionButtons}>
+          <button onClick={expandAll} className={styles.actionButton}>Expand all</button>
+          <button onClick={collapseAll} className={styles.actionButton}>Collapse all</button>
+        </div>
         <div className={styles.menuContainer}>
           {activeTab && menu[activeTab] && (
-            <MenuRenderer nodes={menu[activeTab]} parentPath={`/${activeTab}`} />
+            <MenuRenderer
+              nodes={menu[activeTab]}
+              parentPath={`/${activeTab}`}
+              expandedPaths={expandedPaths}
+              toggleExpand={toggleExpand}
+            />
           )}
         </div>
       </nav>
