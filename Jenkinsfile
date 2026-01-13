@@ -114,7 +114,7 @@ pipeline {
                     export PM2_HOME="/home/pawel/.pm2" # lub inna centralna ścieżka, np. /var/lib/pm2
 
                     cd /srv/jenkins/pt.googlecloudnetworking
-                    if pm2 l | grep -q gcpnetworking; then
+                    if pm2 describe gcpnetworking > /dev/null 2>&1; then
                         echo "gcpnetworking process found. Deleting it before starting a new one."
                         pm2 delete gcpnetworking
                     else
