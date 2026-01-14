@@ -1,5 +1,17 @@
 # Secure Web Proxy
 
+Secure web proxy allows to control the egress traffic. It operates on the applicatoin level 
+
+To setup Secure web proxy we need to 
+- Create subnet for the VM
+- Create subnet for the proxy
+- Create web proxy 
+     - That step requires domain ownership
+- Creeate web proxy policy
+- Setup proxy on the VM
+
+## Subnet for the VM
+It is simple step not described in this guide.
 
 ## Subnet for the proxy
 Google does not run the proxy in your subnet, to use it we need to create special subnet in the network. 
