@@ -14,3 +14,13 @@ On the following screen we see
 
 ## Secure web proxy scenario
 If we have VMs that does not have external IP and we have Secure web proxy. VMs need to have proxy server configured, that points to the Secure Web proxy. The IP is in the different subnetwork, so when request is done the Next hop to different subetwork is used and later proxy takes control. 
+
+## Network and Instance tags
+
+During static route creation we can put instance tags into the field. These are the same as Network tags defined in the VM creation
+
+![instance tags](./images/InstanceTags.png)
+
+VM creation 
+
+![vm creation](./images/vm-creation.png)
