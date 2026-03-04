@@ -87,11 +87,10 @@ pipeline {
         stage('Copy the page') {
             steps {
                 script{
-                    def sourceDir='/var/lib/jenkins/workspace/PT.GoogleCloudNetworking'
                     def destinationDir='/srv/jenkins/pt.googlecloudnetworking'
-                    //sh "mkdir -p ${destinationDir}"
+                    sh "mkdir -p ${destinationDir}"
 
-                    sh "rsync -av --exclude='.git/' ${sourceDir}/ ${destinationDir}"
+                    sh "rsync -av --exclude='.git/' ${env.WORKSPACE}/ ${destinationDir}"
                 }
             }
         }  
