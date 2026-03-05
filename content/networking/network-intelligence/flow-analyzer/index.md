@@ -4,6 +4,11 @@ Flow analyzer displays information about bytes that travel through the network. 
 
 To use it **Flow logs** needs to be enabled for the network.
 
+Flow Analyzer is build on top of VPC flow logs and sends queries to Log analitycs to get aggregated data. 
+
+## VPC Flow logs
+These are logs register samles of the traffic on the VMs. The samples are send to Cloud logging. If we want to use the same logging to do the aggregations we need to **Upgrade to use Log analitycs** the bucket that we would like to use in Log Analytics. 
+
 ## Example
 
 The example uses
