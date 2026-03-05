@@ -41,7 +41,7 @@ pipeline {
             }
         }
 
-        stage('NPM Installx') {
+        stage('NPM Install') {
             steps {
                 script {
                     echo "Installing NPM dependencies..."
@@ -50,81 +50,55 @@ pipeline {
             }
         }
 
-        stage('build') {
+        stage('Build') {
             steps {
                 script {
-                    echo "Installing NPM dependencies..."
+                    echo "Building the application..."
                     sh 'npm run build'
                 }
             }
         }
 
-         stage('DeleteAllconfigurationDir') {
+        stage('Deploy') {
             steps {
-                 script {
-                    def directoryToRemove = '/srv/jenkins/pt.googlecloudnetworking'
-                    echo "Removing directory: '${directoryToRemove}'"
-
-                    echo "Checking if directory '${directoryToRemove}' exists..."
-                    def dirExists = sh(script: "test -d ${directoryToRemove}", returnStatus: true) == 0
-
-                    if (dirExists) {
-                         echo "removing directory."
-
-                        sh "rm -rf ${directoryToRemove}"
-                    }
-
-                    // --- Verify the removal operation ---
-                    echo "Checking if directory '${directoryToRemove}' still exists:"
-                    // 'test -d' checks if a path is a directory.
-                    // '|| true' prevents the step from failing if the directory is already gone.
-                    sh "test -d ${directoryToRemove} && echo 'Directory still exists (Error!)' || echo 'Directory successfully removed.'"
-
-                    echo "Directory removal complete."
+                script {
+                    def destinationDir = '/srv/jenkins/pt.googlecloudnetworking'
+                    echo "Syncing files to ${destinationDir}..."
+                    
+                    // We ensure the destination directory exists and has correct permissions
+                    sh "mkdir -p ${destinationDir}"
+                    
+                    // --delete ensures that files removed in Git are also removed on the server (important for the content/ folder)
+                    // The trailing slash on ${env.WORKSPACE}/ is critical to copy contents, not the folder itself.
+                    sh "rsync -av --delete --exclude='.git/' ${env.WORKSPACE}/ ${destinationDir}/"
                 }
             }
         }
-        stage('Copy the page') {
-            steps {
-                script{
-                    def destinationDir='/srv/jenkins/pt.googlecloudnetworking'
-                    sh "mkdir -p ${destinationDir}"
 
-                    sh "rsync -av --exclude='.git/' ${env.WORKSPACE}/ ${destinationDir}"
-                }
-            }
-        }  
-
-         stage('pm2 list') {
+        stage('Restart App (PM2)') {
             steps {
-                script{
+                script {
                     sh '''
                     export PM2_HOME="/home/pawel/.pm2"
-                    pm2 l
-                    '''
-                }
-            }
-        }  
-
-        stage('start page') {
-            steps {
-                script{
-                    sh '''
-                    export PM2_HOME="/home/pawel/.pm2" # lub inna centralna ścieżka, np. /var/lib/pm2
-
-                    cd /srv/jenkins/pt.googlecloudnetworking
-                    if pm2 describe gcpnetworking > /dev/null 2>&1; then
-                        echo "gcpnetworking process found. Deleting it before starting a new one."
-                        pm2 delete gcpnetworking
-                    else
-                        echo "gcpnetworking process not found. Starting a new one."
-                    fi
                     
+                    cd /srv/jenkins/pt.googlecloudnetworking
+                    
+                    echo "Current PM2 status:"
+                    pm2 status
+                    
+                    echo "Restarting gcpnetworking..."
+                    # We try to delete first to ensure a clean start with new environment/cwd
+                    pm2 delete gcpnetworking || true
+                    
+                    # Start the app. If port 3000 is blocked by a zombie process, 
+                    # you might need to run 'fuser -k 3000/tcp' manually once.
                     pm2 start npm --name "gcpnetworking" -- start
+                    
                     pm2 save
+                    pm2 status
                     '''
                 }
             }
-        }  
+        }
     }
 }
