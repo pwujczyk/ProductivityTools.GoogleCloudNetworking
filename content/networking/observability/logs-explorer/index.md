@@ -1,4 +1,4 @@
-# Logs explorer
+# Logs explorer1
 
 Logs are the raw information about events in the GPC that are often used by the networking services.
 
