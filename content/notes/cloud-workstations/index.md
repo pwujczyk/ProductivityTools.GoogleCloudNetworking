@@ -1,8 +1,3 @@
----
-title: 'Cloud Workstations - PW'
-date: '2026-03-10'
----
-
 # Cloud workstations
 
 
@@ -29,7 +24,15 @@ We see that it listen on localhost:3000 but in reality if we click it proxy page
 ![workstation-configuration](./images/workstation-configuration.png)
 
 
-Errors:
+## Configuration
+
+### Workstation configuration
+First configuration needs to be created. In Code editor Base editor should be chosen 
+
+![workstation-configuration](./images/workstation-configuration.png)
+
+
+### Errors:
 
 I added the **Artifact Registry Reader** role to account from the bug that was thrown at me 
 
