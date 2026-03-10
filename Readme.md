@@ -66,3 +66,7 @@ sudo su - jenkins
  pm2 logs gcpnetworking --lines 100 --nostream
 
 ```
+
+
+## Firebase
+**next.config.mjs** tells to generate static files, without it the page will work only on the Node.js server
