@@ -1,6 +1,5 @@
 # Cloud workstations
 
-
 [Cloud workstations service](https://console.google.com/workstations/list?project=cn-fe-playground) allows to code in the cloud.  
 
 ## Scenarios
@@ -32,15 +31,16 @@ First configuration needs to be created. In Code editor Base editor should be ch
 ![workstation-configuration](./images/workstation-configuration.png)
 
 
+Next workstation with that configuration
+
+![create-workstation](./images/create-workstation.png)
+
 ### Errors:
 
 I added the **Artifact Registry Reader** role to account from the bug that was thrown at me 
 
-![error](.\images\error.png)
+![error](./images/error.png)
 
 I added  **Artifact Registry Reader** role the to the account service-1034282302531@gcp-sa-workstations.iam.gserviceaccount.com as gemini said that this is special workstation account.
 
 I recreated the configuration after it.
-
-
-## Create new workstation
