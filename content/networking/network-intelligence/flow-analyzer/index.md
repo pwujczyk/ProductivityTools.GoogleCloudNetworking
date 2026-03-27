@@ -1,15 +1,17 @@
 # Flow Analyzer
 
-Flow analyzer displays information about bytes that travel through the network. It allows to chose google resource and analyze how much data is send and received by given resource. 
+Flow analyzer displays information about bytes and latency in the network. It allows to chose google resource and analyze how much data is send and received by given resource. 
 
-To use it **Flow logs** needs to be enabled for the network.
+To use Flow analyzer customer need to enable **VPC Flow logs**
 
-Flow Analyzer is build on top of VPC flow logs and sends queries to Log analitycs to get aggregated data. 
+Flow Analyzer is build on top of VPC flow logs and sends queries to Log analitycs. Flow analyzer is a tool that generate in easy way complex queries, query Log analitics and display results in easy to understand way.
 
 ## VPC Flow logs
-These are logs register samles of the traffic on the VMs. The samples are send to Cloud logging. If we want to use the same logging to do the aggregations we need to **Upgrade to use Log analitycs** the bucket that we would like to use in Log Analytics. 
+Logs gather samples of the traffic in the VPC. The raw data is available in Cloud Logging. 
 
-## Example
+Based on cloud logging additional functionality is available - Log analitycs. That functionality allows us not only to query data, but also aggregate it (similar to Flow analyzer, but with more options and with raw interface). If we want to use **Log analytics**  need to **Upgrade to use Log analitycs** the bucket.
+
+## Flow analyzer - Example
 
 The example uses
 - 2 VMs
