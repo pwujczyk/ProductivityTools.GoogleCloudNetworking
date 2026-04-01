@@ -1,10 +1,10 @@
 # Flow Analyzer
 
-Flow analyzer displays information about bytes and latency in the network. It allows to chose google resource and analyze how much data is send and received by given resource. 
+Flow analyzer displays information about bytes and latency in the network. It allows to analyze how much data is send and received by given resource. 
 
-To use Flow analyzer customer need to enable **VPC Flow logs**
+To use Flow analyzer customer needs to enable **VPC Flow logs**.
 
-Flow Analyzer is build on top of VPC flow logs and sends queries to Log analitycs. Flow analyzer is a tool that generate in easy way complex queries, query Log analitics and display results in easy to understand way.
+Flow Analyzer is build on top of VPC flow logs and sends queries to Log analitycs. Flow analyzer is a tool that generate complex queries in easy to understand UI. It also queries Log analitics and displays results in chart and table.
 
 ## VPC Flow logs
 Logs gather samples of the traffic in the VPC. The raw data is available in Cloud Logging. 

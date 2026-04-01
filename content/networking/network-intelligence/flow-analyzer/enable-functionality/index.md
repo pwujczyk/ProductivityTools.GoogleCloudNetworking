@@ -8,4 +8,4 @@
 
 ![flow-log-config](./images/flow-log-config.png)
 
-![new-configuration](./images/new-configuration.pngs)
+![new-configuration](./images/new-configuration.png)
