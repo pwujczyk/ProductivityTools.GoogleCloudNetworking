@@ -22,6 +22,7 @@ When application get bigger we need more functionalities connected with the serv
 Service mesh based on the sidecars have following disadvantages: 
 - uses a lot of CPU
 - update to service mesh required restart all pods (to replace sidecar)
+- if sidecar poxy CPU inceased then it cilled an application
 
 ## GKE ambient
 
@@ -36,3 +37,18 @@ To gather them Waypoint proxy need to be configured it is full Envoy that will l
 
 ### L4 and L7 metrics
 Moving to GKE ambient significantly improves pefomace as pevious implementation always did the L7 metrics, but not always user need the L7 metrics. 
+
+## Waypoint proxy 
+- this is instance of the Envoy proxy, it is sepaate application (not like sidecar that it is attached to container on pod)
+- because it is an application it scales separatly
+- when Waybpoint poxy is enabled, ztunnel will send all taffic through it, instead of directly to destination
+- this is not a gateway to the clsuter, it is a proxy that analyses the east-west traffic to monitor data inside the cluster
+
+### Comparison conservative sidecar model with waypoint proxy
+
+**In the traditional model traffic looked like this**
+Pod A (App) -> Pod A (Proxy) ----------> Pod B (Proxy) -> Pod B (App)
+Analytics L7 happened on the **Pod B (Proxy)**
+
+**In the GKE Ambient with waypoint it looks like this**
+Pod A (App) -> ztunnel A ----------> Waypoint Proxy ----------> ztunnel B -> Pod B (App)
