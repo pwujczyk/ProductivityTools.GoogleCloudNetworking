@@ -1,6 +1,6 @@
 # Flow Analyzer - Traffic Analysis
 
-Let us analyze following traffic:
+Following traffic does not have a lot of traffic, and majority of the traffic is data send to monitoring and logging tools
 
 ![test-setup](./images/traffic.png)
 
@@ -12,3 +12,18 @@ Metrics like CPU or RAM utilization are collected. We can review them in the **C
 
 We can review raw data in the **Metrics explorer** (**Monitoring** -> **Metrics explorer**)
 
+
+## Two VMs example
+
+For the next example let us create two [2VMs that request data from each other](https://github.com/pwujczyk/ProductivityTools.GoogleCloud.Terraform/tree/main/001.two-vms-exposed-to-internet)
+
+
+To generate data:
+```
+1..100 | ForEach-Object { Invoke-WebRequest -Uri "http://34.57.11.220/" -UseBasicParsing }
+```
+
+We see that two VMs calling each other and we see also the ping line done from my computer. 
+
+
+![alt text](./images/traffic2.png)

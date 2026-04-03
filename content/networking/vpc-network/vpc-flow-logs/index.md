@@ -66,3 +66,7 @@ Go to Logs >> Logs storage and edit the **_Default** bucket
 Clic **Create a new Big query dataset that links to this bucket**
 
 ![alt text](./images/big-query-configuration2.png)
+
+After some time we will be able to query data
+
+![alt text](./images/bigquery.png)
