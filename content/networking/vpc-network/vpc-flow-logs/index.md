@@ -30,3 +30,13 @@ The secondary sampling can be decreased to limit the storage used by the logs.
 
 ![secondary-sampling](./images/secondary-sampling.png)
 
+
+## Configuration
+
+Flow logs can be enabled on different levels.
+
+![alt text](./images/configuration1.png)
+
+After click on the link, select chosen network and click **Add new configuration** button
+
+![alt text](./images/configuration2.png)
