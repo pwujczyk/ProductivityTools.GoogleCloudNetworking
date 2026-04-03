@@ -37,7 +37,9 @@ Flow logs can be enabled on different levels.
 
 ![alt text](./images/configuration1.png)
 
-After click on the link, select chosen network and click **Add new configuration** button
+After click on the link, select chosen network and click **Add new configuration** button.
+
+VPC flow logs are stored in the **_Default** bucket. 
 
 ![alt text](./images/configuration2.png)
 
@@ -49,3 +51,18 @@ What happen when you enable it?
 Google not only stores the data in the Cloud logging bucked, but also duplicate the data in the BigQuery table. Google does not take any money for that.
 
 ![alt text](./images/configuration3.png)
+
+
+
+## BiqQuery
+
+To query data in the big query we need to create linked datasource. 
+First make sure that the user has roles/logging.configWriter role. 
+
+Go to Logs >> Logs storage and edit the **_Default** bucket
+
+![alt text](./images/big-query-configuration1.png)
+
+Clic **Create a new Big query dataset that links to this bucket**
+
+![alt text](./images/big-query-configuration2.png)
