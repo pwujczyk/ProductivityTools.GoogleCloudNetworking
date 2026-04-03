@@ -40,3 +40,12 @@ Flow logs can be enabled on different levels.
 After click on the link, select chosen network and click **Add new configuration** button
 
 ![alt text](./images/configuration2.png)
+
+Flow logs is analytcs tool and  Observability Analytics needs to be enabled for Flow analyzer to work.
+
+Upgrading to Observability Analytics do not incur any additional cost. 
+
+What happen when you enable it?
+Google not only stores the data in the Cloud logging bucked, but also duplicate the data in the BigQuery table. Google does not take any money for that.
+
+![alt text](./images/configuration3.png)
