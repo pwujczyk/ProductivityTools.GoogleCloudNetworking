@@ -2,6 +2,33 @@
 
 Secure web proxy allows to control the egress traffic. It operates on the applicatoin level 
 
+
+## Configuration
+
+Routing modes:
+- Next hop - VM does not know that proxy is in the middle
+Advantages:
+- All traffic is routed through the proxy
+- No need to configure proxy on the VM
+- Proxy can do basic filtering based on the SNI 
+Disadvantages:
+- If we want to inspect traffic we need to install Proxy cerficiate on each VM (other way each request fails complaining about man-in-the-middle attack)
+
+- Explicit - We need to provide proxy settings on the VM, by setting the environment variables or set it in the browser
+Advantages:
+- Services knows that use the proxy and certificate does not need to be installed, to have traffic inspected
+- User can change the proxy settings on the VM
+
+
+For explicit we need to chose the port list:
+ - Web proxy operates on L7 and understoods mainly http
+ - Other protocols are not understable for web proxy, depending on the configuration web proxy can reject everything what is not understable/forward it (behaves like a router)/bahave according to policy
+ - 
+
+
+
+
+## Setup
 To setup Secure web proxy we need to 
 - Create subnet for the VM
 - Create subnet for the proxy
