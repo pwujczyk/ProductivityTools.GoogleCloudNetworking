@@ -15,3 +15,5 @@ When checbox will be marked VPC firewall rules will be created automatically. - 
 ![firewall-rules](./images/firewall-rules.png)
 
 ## Secure tag
+
+Tags are placed under the IAM & Admin / Tags

@@ -5,13 +5,13 @@ The functionality can be enabled on the project and organization level.
 When tag is created on the organization level then it can be used in all child projects.
 
 2025 Version
-![2025-version](./Images/2025-version.png)
+![2025-version](./images/2025-version.png)
 
 When project is chosen, tag needs to be assigned to VPC.
 
-![project-level-tag](./Images/project-level-tag.png)
+![project-level-tag](./images/project-level-tag.png)
 
-![current-view](./Images/current-view.png)
+![current-view](./images/current-view.png)
 
 ## Example
 
@@ -21,7 +21,7 @@ The following example shows how to create **org-scope-tag** that has two values
 
 Tag is created on the organization level.
 
-![tag-example-80](./Images/tag-example-80.png)
+![tag-example-80](./images/tag-example-80.png)
 
 Tag detail
 
@@ -122,20 +122,20 @@ Add tag to the VM
 
 Validate if tag is assigned to vm
 
-![tags-on-vm](./Images/tags-on-vm.png)
+![tags-on-vm](./images/tags-on-vm.png)
 
 Page through public ip still should not load as we do not have firewall rule for this given tag.
 
 Open firewall policies on the organization level and Create firewall policy
 
-![create-firewall-policy](./Images/create-firewall-policy.png)
+![create-firewall-policy](./images/create-firewall-policy.png)
 
 Create a rule that targets new tag
 
-![firewall-rule](./Images/firewall-rule.png)
+![firewall-rule](./images/firewall-rule.png)
 
 Associate firewall policy with the organizatoin
 
-![associate-policy](./Images/associate-policy.png)
+![associate-policy](./images/associate-policy.png)
 
 When you open external IP the page should load.
