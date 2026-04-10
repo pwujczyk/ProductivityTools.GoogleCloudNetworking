@@ -12,6 +12,8 @@ When project is chosen, tag needs to be assigned to VPC.
 
 ![current-view](./images/current-view.png)
 
+Secure tags in NGFW can be only used on the ingress traffic. 
+
 ## Example
 
 The following example shows how to create **org-scope-tag** that has two values
@@ -110,7 +112,7 @@ gcloud compute networks delete $NETWORK_NAME \
 
 For validation login to vm and do the ```curl localhost`` it should return the value
 
-![curl-localhost](./images/curl-localhost.png)
+![curl-localhost](./images/curllocalhostpng)
 
 Try to open public ip in browser - it should not load.
 
