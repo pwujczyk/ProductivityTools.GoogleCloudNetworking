@@ -4,7 +4,6 @@ The functionality can be enabled on the project and organization level.
 
 When tag is created on the organization level then it can be used in all child projects.
 
-2025 Version
 ![2025-version](./images/2025-version.png)
 
 When project is chosen, tag needs to be assigned to VPC.
@@ -110,6 +109,7 @@ gcloud compute networks delete $NETWORK_NAME \
 ```
 
 For validation login to vm and do the ```curl localhost`` it should return the value
+
 ![curl-localhost](./images/curl-localhost.png)
 
 Try to open public ip in browser - it should not load.

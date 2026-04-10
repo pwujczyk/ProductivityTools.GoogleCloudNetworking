@@ -4,4 +4,4 @@ Closing project
 - Settings
 - Shutdown
 
-![Shutdown](./Images/ProjectManagement/ShutdownProject.png)
+![Shutdown](./images/ShutdownProject.png)
