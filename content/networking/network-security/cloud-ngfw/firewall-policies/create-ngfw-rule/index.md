@@ -3,6 +3,7 @@
 - To create NGFW firewall rule we need to have Security profile group
 - To create Security profile group we need Threat prevention profile
 
+![resources](./images/resources.png)
 
 ## Create security profile
 Security profile currently is avaiable only on the organization level. It will be avaiable on the project level in 2026.
