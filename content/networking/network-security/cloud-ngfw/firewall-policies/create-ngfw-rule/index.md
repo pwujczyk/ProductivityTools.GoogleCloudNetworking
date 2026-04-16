@@ -26,7 +26,7 @@ Security profile group currently is avaiable only on the organization level. It 
 ![jumbo-frames](./images/jumbo-frames.png)
 
 
-![association](./images/association.png)
+![association](./images/assotiation.png)
 
 When firewall endpoint is created, in the tenant project Manage Instance group with the Palo Alot software is deployed. It takes couple minutes.
 
