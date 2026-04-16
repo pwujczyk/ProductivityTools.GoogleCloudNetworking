@@ -19,3 +19,16 @@ Security profile group currently is avaiable only on the organization level. It 
 ## Create firewall rule
 
 ![firewall-policy](./images/firewall-policy.png)
+
+## Create firewall endpoint
+![firewall-endpoint](./images/firewall-endpoint.png)
+
+![jumbo-frames](./images/jumbo-frames.png)
+
+
+![association](./images/association.png)
+
+When firewall endpoint is created, in the tenant project Manage Instance group with the Palo Alot software is deployed. It takes couple minutes.
+
+
+## Assotiate Firewall endpoint with Network
