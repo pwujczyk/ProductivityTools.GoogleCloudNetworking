@@ -32,3 +32,7 @@ When firewall endpoint is created, in the tenant project Manage Instance group w
 
 
 ## Assotiate Firewall endpoint with Network
+
+![endpoint-association](./images/endpoint-association.png)
+
+![project-assotiation](./images/project-assotiation.png)
