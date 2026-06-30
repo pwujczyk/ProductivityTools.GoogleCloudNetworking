@@ -1,12 +1,9 @@
-# This file was modified to bypass Firebase Extended auth bugs
-# https://github.com/firebase/firebase-tools
-
 name: Deploy to Firebase Hosting on merge
 on:
   push:
     branches:
       - main
-  workflow_dispatch: # Umożliwia ręczne uruchomienie potoku z zakładki Actions
+  workflow_dispatch:
 
 jobs:
   build_and_deploy:
@@ -15,10 +12,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install Dependencies and Build Application
+      - name: Install and Build
         run: npm install && npm run build
 
       - name: Deploy to Firebase Hosting Live
         run: npx firebase-tools deploy --only hosting --project ptprojectsweb --json
         env:
-          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PTPROJECTSWEB }}
+          # Podwójny cudzysłów chroni strukturę JSON-a przed uszkodzeniem w bashu
+          GOOGLE_APPLICATION_CREDENTIALS_JSON: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_PTPROJECTSWEB }}"
