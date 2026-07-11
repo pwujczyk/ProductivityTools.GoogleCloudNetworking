@@ -33,17 +33,14 @@ To use the security profile we need to assign it to the **Security profile group
 
 ![security profile group](./images/security-profile-group.png)
 
-**Security profile group** can be added to the Firewall policy.
+For the **NSI In-Band** or **NSI Out-of-band**, **Security profile group** needs reference to intercept or mirroring profile 
+
+To make functionality working user needs to create Firwall rule with the Proceed to L7 inspection option enabled. In this option proper **Security profile group** needs to be chosen. 
 
 ![firwall-policy](./images/firwall-policy.png)
 
-## Firewall policy
 
-Firewall policy can be asociated wth organizatino or folder. It means that each project that is child of the organization or the folder will have firewall policy forced. 
-
-![inherited-policy](./images/inherited-policy.png)
-
-The dependency graph:
+# The dependency graph
 
 ![Networking-Security-profiles](./images/Networking-Security-profiles.png)
 
