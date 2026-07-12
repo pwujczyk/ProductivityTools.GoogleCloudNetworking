@@ -16,3 +16,5 @@ In the search we can look for the threats
 In the details we see the default action and the severity
 
 ![threat-detail](./images/threat-detail.png)
+
+
